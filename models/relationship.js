@@ -32,7 +32,7 @@ const loadModels = () => {
     
     Serie.belongsTo(SportsPlayer);  
 
-    dbConnection.sync({force: true}).then(() => console.log("Estamos en el aire🤯🤯!!!!"));
+    dbConnection.sync().then(() => console.log("Estamos en el aire🤯🤯!!!!"));
 
 };
 
