@@ -42,7 +42,7 @@ router.put("/:id", async(req, res, next)=>{
 router.delete("/:id", async (req, res) => {
     try {
         const { id } = req.params;
-        await categoryServices.deleteCategory(id);
+        await categoryServices.removeCategory(id);
         res.sendStatus(204);
     } catch (error) {
         next(error)    
