@@ -17,7 +17,7 @@ exports.insertSerie = async (serie) => {
 
 // UPDATE
 exports.updateSerie = async (id, serieDetails) => {
-    return await Serie.update(serieDetails, { where: { id } });
+    await Serie.update(serieDetails, { where: { id } });
     return await Serie.findByPk(id);
 }
 

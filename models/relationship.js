@@ -9,25 +9,25 @@ const User = require('./User')
 const loadModels = () => {
 
     User.hasMany(Serie, {
-        foreignKey: {allowNull: false},
+        
     });
 
     Serie.belongsToMany(User, {through: 'UserSeries'});
 
     Serie.hasMany(Episode, {
-        foreignKey: {allowNull: false}
+       
     })
 
     Episode.belongsTo(Serie);
 
     Category.hasMany(Serie, {
-        foreignKey: { allowNull: false }
+       
     });
     
     Serie.belongsTo(Category);  
          
     SportsPlayer.hasMany(Serie, {
-       foreignKey: {allowNull: false}
+     
     });
     
     Serie.belongsTo(SportsPlayer);  
