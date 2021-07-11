@@ -1,6 +1,6 @@
 var express = require("express");
 var router = express.Router();
-const sportPlayerService = require("../services/sportsplayerService");
+const sportPlayerService = require("../services/sportsPlayerService");
 
 
 router.get("/", async (req, res) => {

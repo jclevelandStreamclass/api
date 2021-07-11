@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 const serieService = require("../services/serieService");
 
-// GET 
+// GET ALL
 router.get('/', async(req, res, next) => {
     try {
         const series = await serieService.getAllSeries();

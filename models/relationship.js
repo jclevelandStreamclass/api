@@ -1,44 +1,31 @@
 const dbConnection = require("../config/db");
 
 const Serie = require("./Serie");
-const Episode = require('./Episode')
-const Category = require('./Category')
-const SportsPlayer = require("./SportsPlayer")
-const User = require('./User')
+const Episode = require("./Episode");
+const Category = require("./Category");
+const SportsPlayer = require("./SportsPlayer");
+const User = require("./User");
+const TokenOperation = require("./TokenOperation");
 
 const loadModels = () => {
+  User.hasMany(Serie, {});
+  Serie.belongsToMany(User, { through: "UserSeries" });
 
-    User.hasMany(Serie, {
-        
-    });
+  Serie.hasMany(Episode, {});
 
-    Serie.belongsToMany(User, {through: 'UserSeries'});
+  Episode.belongsTo(Serie);
 
-    Serie.hasMany(Episode, {
-       
-    })
+  Category.hasMany(Serie, {});
 
-    Episode.belongsTo(Serie);
+  Serie.belongsTo(Category);
 
-    Category.hasMany(Serie, {
-       
-    });
-    
-    Serie.belongsTo(Category);  
-         
-    SportsPlayer.hasMany(Serie, {
-     
-    });
-    
-    Serie.belongsTo(SportsPlayer);  
+  SportsPlayer.hasMany(Serie, {});
 
-    dbConnection.sync().then(() => console.log("Estamos en el aire🤯🤯!!!!"));
+  Serie.belongsTo(SportsPlayer);
+  User.hasMany(TokenOperation);
+  TokenOperation.belongsTo(User);
 
+  dbConnection.sync().then(() => console.log("Estamos en el aire🤯🤯!!!!"));
 };
 
 module.exports = loadModels;
-
-
-
-
-
