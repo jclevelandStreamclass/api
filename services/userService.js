@@ -44,7 +44,7 @@ exports.signUp = async (userData) => {
     tokenOperation.toJSON().id
   }`;
   const subject = "Activate your account";
-  const email = "miguelbermell@gmail.com";
+  const email = user.email;
 
   await mailService.sendConfirmationMail({ email, subject, text });
 };
