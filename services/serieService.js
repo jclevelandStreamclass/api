@@ -23,6 +23,12 @@ exports.createSerie = async (serie) => {
 exports.editSerie = async (id, serieDetails) => {
   const validationData = await updateSerieSchema.validateAsync(serieDetails);
 
+  const serieDb = await serieRepository.findSerieById(id);
+
+  if (!serieDb) {
+    throw new Error("Serie not found in databases");
+  }
+
   await serieRepository.updateSerie(id, validationData);
 
   const serie = await serieRepository.findSerieById(id);
@@ -31,5 +37,11 @@ exports.editSerie = async (id, serieDetails) => {
 };
 
 exports.removeSerie = async (id) => {
+  const serieDb = await serieRepository.findSerieById(id);
+
+  if (!serieDb) {
+    throw new Error("Serie not found in databases");
+  }
+
   return await serieRepository.deleteSerie(id);
 };
