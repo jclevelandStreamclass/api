@@ -17,8 +17,9 @@ exports.createCategory = async (category) =>{
     await categoryRepository.insertCategory(category);
 };
 
-exports.editCategory = async(categoryId)=>{
+exports.editCategory = async(categoryDetails, categoryId)=>{
     const category = await categoryRepository.findCategoryById(categoryId);
+    await categoryRepository.updateCategory(categoryId, categoryDetails)
 };
 
 exports.removeCategory = async(id)=>{
