@@ -6,7 +6,7 @@ const categoryServices = require("../services/categoryService");
 router.get("/all", async (req, res, next)=>{
     try {
         const categories = await categoryServices.getAllCategories();
-        res.status(200).json(posts);
+        res.status(200).json(categories);
     } catch (error) {
         next(error);
     }
@@ -16,6 +16,7 @@ router.get("/:id", async (req, res, next)=>{
     try {
         const{id}=req.params;
         const category = await categoryServices.getCategory(id);
+        res.status(200).json(category);
     } catch (error) {
         next(error);
     }
@@ -33,7 +34,8 @@ router.post("/", async(req, res, next)=>{
 router.put("/:id", async(req, res, next)=>{
     try {
         const {id}=req.params;
-        await categoryServices.editCategory(req.user, req.body, id);
+        await categoryServices.editCategory(req.body, id);
+        res.sendStatus(204);
     } catch (error) {
         next(error);
     }
@@ -48,4 +50,5 @@ router.delete("/:id", async (req, res) => {
         next(error)    
     }
 });
+
 module.exports = router;
