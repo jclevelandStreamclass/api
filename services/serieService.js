@@ -1,4 +1,8 @@
 const serieRepository = require("../repositories/serieRepository");
+const {
+  insertSerieSchema,
+  updateSerieSchema,
+} = require("../validations/serieValidation");
 
 exports.getAllSeries = async () => {
   const series = await serieRepository.findAllSeries();
@@ -6,21 +10,23 @@ exports.getAllSeries = async () => {
 };
 
 exports.getSerieById = async (id) => {
-  const usuario = await serieRepository.findSerieById(id);
-  return usuario;
+  const serie = await serieRepository.findSerieById(id);
+  return serie;
 };
 
 exports.createSerie = async (serie) => {
-  // delete serie.id;
-  if (!serie) {
-    throw new Error();
-  }
+  const validationData = await insertSerieSchema.validateAsync(serie);
 
-  return await serieRepository.insertSerie(serie);
+  return await serieRepository.insertSerie(validationData);
 };
 
 exports.editSerie = async (id, serieDetails) => {
-  const serie = await serieRepository.updateSerie(id, serieDetails);
+  const validationData = await updateSerieSchema.validateAsync(serieDetails);
+
+  await serieRepository.updateSerie(id, validationData);
+
+  const serie = await serieRepository.findSerieById(id);
+
   return serie;
 };
 

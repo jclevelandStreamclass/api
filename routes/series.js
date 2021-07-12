@@ -14,7 +14,8 @@ router.get("/", async (req, res, next) => {
 
 router.get("/:id", async (req, res, next) => {
   try {
-    const serie = await serieService.getSerieById();
+    const { id } = req.params;
+    const serie = await serieService.getSerieById(id);
     res.status(200).json(serie);
   } catch (error) {
     res.status(400).json({ message: error.message });
