@@ -3,12 +3,12 @@ const Episode = require("../models/Episode");
 
 // FIND
 exports.findAllSeries = async () => {
-  return await Serie.findAll();
+  return await Serie.findAll({ include: { model: Episode } });
 };
 
 exports.findSerieById = async (id) => {
   return await Serie.findByPk(id, {
-    include: [{ model: Episode, attributes: [["title", "duration", "video"]] }],
+    include: [{ include: { model: Episode } }],
   });
 };
 

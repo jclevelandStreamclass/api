@@ -10,10 +10,10 @@ const { insertEpisodeSchema } = require('../validations/episodeValidations');
 exports.createEpisode = async (episode) => {
     
     const { title, duration, description, photo, video } = episode;
-    // console.log(video)
-    // if (!title || !duration || !description || !photo || !video) {
-    //     throw new HttpError(400, ERRORS.INVALID_DATA)
-    // }
+    console.log(video)
+    if (!title || !duration || !description || !photo || !video) {
+        throw new HttpError(400, ERRORS.INVALID_DATA)
+    }
     try {
         await insertEpisodeSchema.validateAsync(episode);
        
