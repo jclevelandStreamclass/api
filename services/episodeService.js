@@ -2,10 +2,24 @@ const episodeRepository = require('../repositories/episodeRepository');
 const nodemailer = require('nodemailer');
 const loadConfig = require("../config/nodemailer");
 const { sendConfirmationMail } = require("../services/mailService");
+const HttpError = require('../utils/httpError');
+const ERRORS = require('../utils/constants');
+const { insertEpisodeSchema } = require('../validations/episodeValidations');
 
 
-exports.createEpisode = async(episode) => {
-    //validations
+exports.createEpisode = async (episode) => {
+    
+    const { title, duration, description, photo, video } = episode;
+    // console.log(video)
+    // if (!title || !duration || !description || !photo || !video) {
+    //     throw new HttpError(400, ERRORS.INVALID_DATA)
+    // }
+    try {
+        await insertEpisodeSchema.validateAsync(episode);
+       
+    } catch (error) {
+        throw new HttpError(400, ERRORS.INVALID_DATA)
+    }
     return await episodeRepository.insertEpisode(episode);
 };
 
