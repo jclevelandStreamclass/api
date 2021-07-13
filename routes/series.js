@@ -1,4 +1,5 @@
 var express = require("express");
+const roleValidation = require("../middlewares/roleValidation");
 var router = express.Router();
 const serieService = require("../services/serieService");
 
@@ -14,7 +15,8 @@ router.get("/", async (req, res, next) => {
 
 router.get("/:id", async (req, res, next) => {
   try {
-    const serie = await serieService.getSerieById();
+    const { id } = req.params;
+    const serie = await serieService.getSerieById(id);
     res.status(200).json(serie);
   } catch (error) {
     res.status(400).json({ message: error.message });
@@ -22,7 +24,7 @@ router.get("/:id", async (req, res, next) => {
 });
 
 // POST
-router.post("/", async (req, res, next) => {
+router.post("/", roleValidation("user"), async (req, res, next) => {
   try {
     const serie = await serieService.createSerie(req.body);
     res.status(200).json(serie);
