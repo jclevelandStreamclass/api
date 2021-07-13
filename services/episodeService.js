@@ -1,16 +1,12 @@
 const episodeRepository = require("../repositories/episodeRepository");
-const nodemailer = require("nodemailer");
-const loadConfig = require("../config/nodemailer");
-const { sendConfirmationMail } = require("../services/mailService");
 const HttpError = require('../utils/httpError');
 const ERRORS = require('../utils/constants');
-const { insertEpisodeSchema } = require('../validations/episodeValidations');
+const { insertEpisodeSchema, updateEpisodeSchema } = require('../validations/episodeValidations');
 
 
 exports.createEpisode = async (episode) => {
     
     const { title, duration, description, photo, video } = episode;
-    console.log(video)
     if (!title || !duration || !description || !photo || !video) {
         throw new HttpError(400, ERRORS.INVALID_DATA)
     }
@@ -34,7 +30,7 @@ exports.getEpisodeById = async (id) => {
 exports.removeEpisode = async (id) => {
   const foundEpisode = await episodeRepository.findEpisodeById(id);
   if (!foundEpisode) {
-    throw new Error("This Episode doesn't exist");
+    throw new HttpError(404, ERRORS.INVALID_EPISODE);
   }
   return await episodeRepository.deleteEpisode(id);
 };
@@ -42,7 +38,13 @@ exports.removeEpisode = async (id) => {
 exports.editEpisode = async (id, episodeDetails) => {
   const foundEpisode = await episodeRepository.findEpisodeById(id);
   if (!foundEpisode) {
-    throw new Error("This Episode doesn't exist");
+    throw new HttpError(404, ERRORS.INVALID_EPISODE);
+  }
+  try {
+    await updateEpisodeSchema.validateAsync(episodeDetails);
+
+  } catch (error) {
+    throw new HttpError(400, ERRORS.INVALID_DATA)
   }
   return await episodeRepository.updateEpisode(id, episodeDetails);
 };
