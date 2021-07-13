@@ -60,21 +60,23 @@ exports.activateUser = async (id) => {
 exports.login = async ({ email, password }) => {
   if (!email || !password) throw new Error("Invalid data provided");
 
-  const user = await userRepository.findUserByEmail(email);
-
+  const user = await userRepository.findUserWithPasswordByEmail(email);
   if (!user) throw new Error("Not found user");
 
   const encryptedPassword = await encryptPassword(password);
-
+console.log(password)
+console.log(encryptedPassword)
   if (user.password !== encryptedPassword) throw new Error("Wrong password");
-
+console.log(user.name)
   const token = generateToken({
     id: user.id,
     email: user.email,
+    name:user.name,
     phone: user.phone,
     role: user.role,
     active: user.active,
   });
+  console.log(user.name)
 
   return token;
 };

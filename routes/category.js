@@ -1,5 +1,5 @@
 const express = require("express");
-
+const roleValidation = require("../middlewares/roleValidation");
 const router = express.Router();
 const categoryServices = require("../services/categoryService");
 
@@ -22,7 +22,7 @@ router.get("/:id", async (req, res, next) => {
   }
 });
 
-router.post("/", async (req, res, next) => {
+router.post("/", roleValidation("admin"), async (req, res, next) => {
   try {
     await categoryServices.createCategory(req.body);
     res.sendStatus(201);
@@ -31,7 +31,7 @@ router.post("/", async (req, res, next) => {
   }
 });
 
-router.put("/:id", async (req, res, next) => {
+router.put("/:id", roleValidation("admin"), async (req, res, next) => {
   try {
     const { id } = req.params;
     await categoryServices.editCategory(req.body, id);
@@ -41,7 +41,7 @@ router.put("/:id", async (req, res, next) => {
   }
 });
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id",  roleValidation("admin"), async (req, res) => {
   try {
     const { id } = req.params;
     await categoryServices.removeCategory(id);

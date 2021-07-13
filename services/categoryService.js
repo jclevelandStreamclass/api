@@ -1,5 +1,6 @@
 const categoryRepository = require("../repositories/categoryRepository");
 const HttpError = require("../utils/httpError");
+const { updateCategorySchema } = require("../validations/categoryValidation");
 
 exports.getCategory = async (id) =>{
     const category = await categoryRepository.findCategoryById(id);
@@ -19,7 +20,8 @@ exports.createCategory = async (category) =>{
 
 exports.editCategory = async(categoryDetails, categoryId)=>{
     const category = await categoryRepository.findCategoryById(categoryId);
-    await categoryRepository.updateCategory(categoryId, categoryDetails)
+    const validatioData = await updateCategorySchema.validateAsync(categoryDetails)
+    await categoryRepository.updateCategory(categoryId, validatioData)
 };
 
 exports.removeCategory = async(id)=>{

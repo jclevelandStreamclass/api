@@ -1,8 +1,9 @@
 var express = require("express");
 var router = express.Router();
 const userService = require("../services/userService");
+const roleValidation = require("../middlewares/roleValidation");
 
-router.get("/", async (req, res) => {
+router.get("/", roleValidation("admin"), async (req, res) => {
   try {
     const users = await userService.getAllUsers();
     res.status(200).json(users);
@@ -33,11 +34,19 @@ router.get("/activate/:id", async (req, res, next) => {
 
 router.post("/signup", async (req, res, next) => {
   try {
-    console.log(req.body);
     await userService.signUp(req.body);
     res.sendStatus(201);
   } catch (err) {
     res.status(400).json({ message: err.message });
+  }
+});
+
+router.post("/login", async (req, res, next) => {
+  try {
+    const user = await userService.login(req.body);
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
   }
 });
 

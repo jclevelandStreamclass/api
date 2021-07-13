@@ -11,12 +11,14 @@ const seriesRouter = require("./routes/series");
 const episodesRouter = require("./routes/episodes");
 const categoryRouter = require("./routes/category");
 const sportsPlayerRouter = require("./routes/sportsPlayer");
+const tokenValidation = require("./middlewares/tokenValidation")
 const errorHandler = require("./middlewares/errorHandler");
 
 const loadModels = require("./models/relationship");
 
 var app = express();
 loadModels();
+app.use(tokenValidation);
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -31,5 +33,4 @@ app.use("/sportsPlayer", sportsPlayerRouter);
 app.use("/categories", categoryRouter);
 
 app.use(errorHandler);
-
 module.exports = app;
