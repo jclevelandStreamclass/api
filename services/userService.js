@@ -64,19 +64,19 @@ exports.login = async ({ email, password }) => {
   if (!user) throw new Error("Not found user");
 
   const encryptedPassword = await encryptPassword(password);
-console.log(password)
-console.log(encryptedPassword)
+  console.log(password);
+  console.log(encryptedPassword);
   if (user.password !== encryptedPassword) throw new Error("Wrong password");
-console.log(user.name)
+  console.log(user.name);
   const token = generateToken({
     id: user.id,
     email: user.email,
-    name:user.name,
+    name: user.name,
     phone: user.phone,
     role: user.role,
     active: user.active,
   });
-  console.log(user.name)
+  console.log(user.name);
 
   return token;
 };
