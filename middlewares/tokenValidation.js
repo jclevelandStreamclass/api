@@ -6,7 +6,7 @@ const tokenValidation = (req, res, next) => {
     const { id, name, email, role, phone } = validateToken(token);
     req.user = { id, name, email, role, phone };
   }
-  if (!req.user?.active) throw new Error("You must activate your account");
+
   next();
 };
 
