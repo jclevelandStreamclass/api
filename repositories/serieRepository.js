@@ -3,13 +3,27 @@ const Episode = require("../models/Episode");
 
 // FIND
 exports.findAllSeries = async () => {
-  return await Serie.findAll();
+  return await Serie.findAll({
+    include: [
+      {
+        model: Episode,
+        attributes: ["title", "duration", "photo"],
+      },
+    ],
+  });
 };
 
 exports.findSerieById = async (id) => {
-  return await Serie.findByPk(id, {
-    include: [{ model: Episode, attributes: [["title", "duration", "video"]] }],
+  // TODO incluir filtrado de Episode
+  const serie = await Serie.findByPk(id, {
+    include: [
+      {
+        model: Episode,
+        attributes: ["title", "duration", "photo"],
+      },
+    ],
   });
+  return serie;
 };
 
 // INSERT
@@ -19,8 +33,7 @@ exports.insertSerie = async (serie) => {
 
 // UPDATE
 exports.updateSerie = async (id, serieDetails) => {
-  await Serie.update(serieDetails, { where: { id } });
-  return await Serie.findByPk(id);
+  return await Serie.update(serieDetails, { where: { id } });
 };
 
 // DELETE

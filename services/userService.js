@@ -11,7 +11,7 @@ exports.getAllUsers = async () => {
 };
 
 exports.getUserById = async (id) => {
-  const user = await userRepository.findUserById();
+  const user = await userRepository.findUserById(id);
   return user.toJSON();
 };
 

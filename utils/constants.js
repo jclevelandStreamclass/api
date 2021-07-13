@@ -4,15 +4,15 @@ exports.CATEGORY = Object.freeze({
   F1: "formula 1",
   SAIL: "sail",
   BALLET: "ballet",
-    NULL: "null"
+  NULL: "null",
 });
 
 exports.ROLE = Object.freeze({
-  ADMIN: 'admin',
-  USER: 'user'
-})
+  ADMIN: "admin",
+  USER: "user",
+});
 
-
+exports.INVALID_ACCOUNT = "You must activate your account";
 exports.NO_USER_DATA_PROVIDED =
   "You must provide a valid email address and a password";
 exports.INVALID_DATA = "Data provided is invalid";
