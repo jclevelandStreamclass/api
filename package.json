@@ -6,7 +6,9 @@
     "start": "node ./bin/www",
     "start:dev": "nodemon ./bin/www",
     "seed": "node ./utils/userSeed.js",
-    "seed-series": "node ./seed/seriesSeed"
+    "seed-series": "node ./seed/seriesSeed",
+    "seed-cate": "node ./seed/categorySeed"
+
   },
   "dependencies": {
     "cloudinary": "^1.26.2",
