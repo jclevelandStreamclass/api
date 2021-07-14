@@ -5,7 +5,8 @@
   "scripts": {
     "start": "node ./bin/www",
     "start:dev": "nodemon ./bin/www",
-    "seed": "node ./utils/userSeed.js"
+    "seed": "node ./utils/userSeed.js",
+    "seed-series": "node ./seed/seriesSeed"
   },
   "dependencies": {
     "cloudinary": "^1.26.2",
