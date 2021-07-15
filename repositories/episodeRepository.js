@@ -12,6 +12,11 @@ exports.findEpisodeById = async(id) => {
     return await Episode.findByPk(id);
 }
 
+exports.searchEpisode = async (filter) => {
+    const {title} = filter
+    return await Episode.findAll({where: {title}});
+  }
+
 exports.deleteEpisode = async(id) => {
     return  await Episode.destroy({where: {id}})
 }

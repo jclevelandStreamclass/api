@@ -14,6 +14,11 @@ exports.getSerieById = async (id) => {
   return serie;
 };
 
+exports.searchSerieName = async (filter) => {
+  return await serieRepository.searchSerie(filter)
+}
+
+
 exports.createSerie = async (serie) => {
   const validationData = await insertSerieSchema.validateAsync(serie);
 

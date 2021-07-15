@@ -11,6 +11,10 @@ exports.getAllCategories = async () => {
   return await categoryRepository.findAllCategories();
 };
 
+exports.searchCategoryName = async (filter) => {
+  return await categoryRepository.searchCategory(filter)
+}
+
 exports.createCategory = async (category) => {
   if (!category.name) {
     throw new HttpError(400, "Miss name");
