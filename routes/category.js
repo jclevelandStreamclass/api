@@ -12,8 +12,18 @@ router.get("/all", async (req, res, next) => {
   }
 });
 
+router.get("/search:name?", async (req, res, next)=> {
+  try {
+    const categories = await categoryServices.searchCategoryName(req.query);
+    res.status(200).json(categories)
+  } catch (error) {
+    next(error)
+  }
+})
+
 router.get("/:id", async (req, res, next) => {
   try {
+    console.log('pedo')
     const { id } = req.params;
     const category = await categoryServices.getCategory(id);
     res.status(200).json(category);
@@ -21,6 +31,8 @@ router.get("/:id", async (req, res, next) => {
     next(error);
   }
 });
+
+
 
 router.post("/", roleValidation("admin"), async (req, res, next) => {
   try {
