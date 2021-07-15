@@ -13,6 +13,15 @@ router.get("/", async (req, res, next) => {
   }
 });
 
+router.get("/search:title?", async (req, res, next)=> {
+  try {
+    const series = await serieService.searchSerieName(req.query);
+    res.status(200).json(series)
+  } catch (error) {
+    next(error)
+  }
+})
+
 router.get("/:id", async (req, res, next) => {
   try {
     const { id } = req.params;

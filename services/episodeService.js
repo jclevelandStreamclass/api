@@ -27,6 +27,10 @@ exports.getEpisodeById = async (id) => {
   return await episodeRepository.findEpisodeById(id);
 };
 
+exports.searchEpisodeName = async (filter) => {
+  return await episodeRepository.searchEpisode(filter)
+}
+
 exports.removeEpisode = async (id) => {
   const foundEpisode = await episodeRepository.findEpisodeById(id);
   if (!foundEpisode) {

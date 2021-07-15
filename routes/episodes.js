@@ -12,6 +12,16 @@ router.get('/', async (req, res) => {
 
 });
 
+router.get("/search:title?", async (req, res, next)=> {
+    try {
+      const episodes = await episodeService.searchEpisodeName(req.query);
+      res.status(200).json(episodes)
+    } catch (error) {
+      next(error)
+    }
+  })
+
+  
 router.get('/:id', async (req, res) => {
     try {
         const { id } = req.params;
