@@ -18,6 +18,7 @@ const Serie = dbConnection.define("serie", {
   photo: {
     type: DataTypes.STRING,
   },
+  
 
 });
 

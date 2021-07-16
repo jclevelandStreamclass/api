@@ -9,7 +9,7 @@ exports.findAllSeries = async () => {
 
 exports.findSerieById = async (id) => {
   return await Serie.findByPk(id, {
-    include: [{ model: Episode }, {model: SportsPlayer }]
+    include: [{ model: Episode }]
   });
   //return serie;
 };

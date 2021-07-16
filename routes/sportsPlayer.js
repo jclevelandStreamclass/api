@@ -23,7 +23,9 @@ router.get("/:id", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
+
   try {
+   
     const sportsPlayer = await sportsPlayerService.createSportsPlayer(req.body);
     res.status(201).json(sportsPlayer);
   } catch (error) {
