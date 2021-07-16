@@ -5,7 +5,7 @@ exports.insertEpisode = async(episode) => {
 };
 
 exports.findAllEpisodes = async() => {
-    return await Episode.findAll({ order:[["duration", "DESC"]]});
+    return await Episode.findAll({ order:[["number", "ASC"]]});
 };
 
 exports.findEpisodeById = async(id) => {

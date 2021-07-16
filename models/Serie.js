@@ -1,5 +1,6 @@
 const { DataTypes } = require("sequelize");
 const dbConnection = require("../config/db");
+const Category = require("./Category")
 
 const Serie = dbConnection.define("serie", {
   id: {
@@ -11,12 +12,13 @@ const Serie = dbConnection.define("serie", {
   title: {
     type: DataTypes.STRING(25),
   },
-  description: {
+  description: { 
     type: DataTypes.STRING(500),
   },
   photo: {
     type: DataTypes.STRING,
   },
+
 });
 
 module.exports = Serie;
