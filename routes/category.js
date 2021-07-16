@@ -54,7 +54,7 @@ router.put("/:id", roleValidation("admin"), async (req, res, next) => {
   }
 });
 
-router.delete("/:id",  roleValidation("admin"), async (req, res) => {
+router.delete("/:id", roleValidation("admin"), async (req, res) => {
   try {
     const { id } = req.params;
     await categoryServices.removeCategory(id);

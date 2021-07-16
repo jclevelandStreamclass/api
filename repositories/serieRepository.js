@@ -11,13 +11,13 @@ exports.findSerieById = async (id) => {
   return await Serie.findByPk(id, {
     include: [{ model: Episode }]
   });
-  //return serie;
+ 
 };
 
 exports.searchSerie = async (filter) => {
-  const {title} = filter
-  return await Serie.findAll({where: {title}});
-}
+  const { title } = filter;
+  return await Serie.findAll({ where: { title } });
+};
 // INSERT
 exports.insertSerie = async (serie) => {
   return await Serie.create(serie);
