@@ -17,7 +17,7 @@ const loadModels = () => {
 
   Category.hasMany(Serie, {});
 
-  Serie.belongsTo(Category);
+ Serie.belongsTo(Category);
 
   SportsPlayer.hasMany(Serie, {});
 

@@ -8,6 +8,9 @@ const Episode = dbConnection.define("episode", {
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,
   },
+  number: {
+    type: DataTypes.TINYINT
+  },
   title: {
     type: DataTypes.STRING(50),
   },

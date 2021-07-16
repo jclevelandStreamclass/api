@@ -1,5 +1,6 @@
 const Serie = require("../models/Serie");
 const Episode = require("../models/Episode");
+const SportsPlayer = require("../models/SportsPlayer");
 
 // FIND
 exports.findAllSeries = async () => {
@@ -8,8 +9,9 @@ exports.findAllSeries = async () => {
 
 exports.findSerieById = async (id) => {
   return await Serie.findByPk(id, {
-    include: [{ include: { model: Episode } }],
+    include: [{ model: Episode }]
   });
+ 
 };
 
 exports.searchSerie = async (filter) => {
