@@ -34,7 +34,8 @@ router.get("/:id", async (req, res, next) => {
 
 
 
-router.post("/", roleValidation("admin"), async (req, res, next) => {
+//router.post("/", roleValidation("admin"), async (req, res, next) => {
+  router.post("/",  async (req, res, next) => {
   try {
     await categoryServices.createCategory(req.body);
     res.sendStatus(201);
