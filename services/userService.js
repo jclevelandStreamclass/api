@@ -76,9 +76,20 @@ exports.login = async ({ email, password }) => {
     role: user.role,
     active: user.active,
   });
+
+  const userDetails = {
+    id: user.id,
+    bearer: token,
+    email: user.email,
+    name: user.name,
+    phone: user.phone,
+    role: user.role,
+    active: user.active,
+    avatar: user.avatar,
+  };
   console.log(user.name);
 
-  return token;
+  return userDetails;
 };
 
 exports.editUser = async (id, userData) => {
