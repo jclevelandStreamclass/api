@@ -40,9 +40,11 @@ exports.signUp = async (userData) => {
     operation: "ACTIVATION",
   });
 
-  const text = `http://localhost:3000/users/activate/${
-    tokenOperation.toJSON().id
-  }`;
+  // const text = `http://localhost:3000/users/activate/${
+  //   tokenOperation.toJSON().id
+  // }`;
+
+  const text = `http://localhost:4200/login/${tokenOperation.toJSON().id}`;
   const subject = "Activate your account";
   const email = user.email;
 
