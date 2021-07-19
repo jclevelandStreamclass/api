@@ -33,6 +33,19 @@ router.get('/:id', async (req, res) => {
 
 });
 
+
+router.get('/totaltime/:seriesId', async (req, res) => {
+    try {
+        const { seriesId } = req.params;
+        const totaltime = await episodeService.getSumEpisodeDurationBySerieId(seriesId);
+        res.status(200).json(totaltime);
+    } catch (error) {
+        res.status(404).json({ message: error.message })
+    }
+
+});
+
+
 router.post('/', async (req, res) => {
     try {
         const episode = await episodeService.createEpisode(req.body);
