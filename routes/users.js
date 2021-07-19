@@ -35,7 +35,7 @@ router.get("/activate/:id", async (req, res, next) => {
 router.post("/signup", async (req, res, next) => {
   try {
     await userService.signUp(req.body);
-    res.sendStatus(201);
+    res.status(201).json(req.body);
   } catch (err) {
     res.status(400).json({ message: err.message });
   }

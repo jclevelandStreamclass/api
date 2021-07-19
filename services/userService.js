@@ -20,7 +20,9 @@ exports.getUserByEmail = async (email) => {
 };
 
 exports.signUp = async (userData) => {
+  // console.log(userData);
   const validateUser = await insertUserSchema.validateAsync(userData);
+
   const encryptedPassword = await encryptPassword(validateUser.password);
 
   // // TE DEJO EL EDIT EL LOGIN Y EL DELETE
@@ -35,6 +37,8 @@ exports.signUp = async (userData) => {
     ...validateUser,
     password: encryptedPassword,
   });
+
+  console.log(user);
   const tokenOperation = await tokenRepository.createTokenOperation({
     userId: user.toJSON().id,
     operation: "ACTIVATION",
