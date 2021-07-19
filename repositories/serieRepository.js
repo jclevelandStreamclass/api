@@ -1,6 +1,7 @@
 const Serie = require("../models/Serie");
 const Episode = require("../models/Episode");
 const SportsPlayer = require("../models/SportsPlayer");
+const { Sequelize } = require("sequelize");
 
 // FIND
 exports.findAllSeries = async () => {
@@ -8,11 +9,8 @@ exports.findAllSeries = async () => {
 };
 
 exports.findSerieById = async (id) => {
-  return await Serie.findByPk(id, {
-    include: [{ model: Episode }]
-  });
- 
-};
+  return await Serie.findByPk(id, {include: [{model: Episode}], order: [['episodes', 'number', 'ASC']]})
+  };
 
 exports.searchSerie = async (filter) => {
   const { title } = filter;

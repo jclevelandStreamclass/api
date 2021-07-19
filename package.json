@@ -6,9 +6,11 @@
     "start": "node ./bin/www",
     "start:dev": "nodemon ./bin/www",
     "seed": "node ./utils/userSeed.js",
-    "seed-series": "node ./seed/seriesSeed",
-    "seed-cate": "node ./seed/categorySeed",
-    "seed-episodes": "node ./seed/episodeSeed"
+    "seed3": "node ./seed/seriesSeed",
+    "seed1": "node ./seed/categorySeed",
+    "seed2": "node ./seed/sportPlayerSeed.js",
+    "seed4": "node ./seed/episodeSeed.js"
+
   },
   "dependencies": {
     "cloudinary": "^1.26.2",
