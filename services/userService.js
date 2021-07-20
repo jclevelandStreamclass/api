@@ -2,7 +2,10 @@ const userRepository = require("../repositories/userRepository");
 const encryptPassword = require("../utils/encryptPassword");
 const HttpError = require("../utils/httpError");
 const { generateToken } = require("./jwtServices");
-const { insertUserSchema } = require("../validations/userValidation");
+const {
+  insertUserSchema,
+  updateUserSchema,
+} = require("../validations/userValidation");
 const tokenRepository = require("../repositories/tokenOperationRepository");
 const mailService = require("../services/mailService");
 
@@ -95,16 +98,18 @@ exports.login = async ({ email, password }) => {
 };
 
 exports.editUser = async (id, userData) => {
-  const validateUser = await insertUserSchema.validateAsync(userData);
+  const user = await userRepository.findUserById(id);
+  if (!user) throw new Error("Not found user");
+
+  const validateUser = await updateUserSchema.validateAsync(userData);
 
   if (validateUser.password) {
     validateUser.password = await encryptPassword(validateUser.password);
   }
 
-  // retornamos user??
-  const user = await userRepository.updateUser(id, validation);
+  const updateUser = await userRepository.updateUser(id, validateUser);
 
-  return user;
+  return updateUser;
 };
 
 exports.removeUser = async (id) => {
