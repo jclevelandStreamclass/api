@@ -20,7 +20,6 @@ exports.searchSerieName = async (filter) => {
 
 exports.createSerie = async (serie) => {
   const validationData = await insertSerieSchema.validateAsync(serie);
-
   return await serieRepository.insertSerie(validationData);
 };
 
