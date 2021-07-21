@@ -10,7 +10,6 @@
     "seed1": "node ./seed/categorySeed",
     "seed2": "node ./seed/sportPlayerSeed.js",
     "seed4": "node ./seed/episodeSeed.js"
-
   },
   "dependencies": {
     "cloudinary": "^1.26.2",

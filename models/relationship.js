@@ -5,10 +5,18 @@ const Episode = require("./Episode");
 const Category = require("./Category");
 const SportsPlayer = require("./SportsPlayer");
 const User = require("./User");
+const UserPayment = require("./userPayment");
+
 const TokenOperation = require("./TokenOperation");
 
 const loadModels = () => {
   User.hasMany(Serie, {});
+
+  UserPayment.belongsTo(User);
+  UserPayment.belongsTo(Serie);
+  User.hasMany(UserPayment);
+  Serie.hasMany(UserPayment);
+
   Serie.belongsToMany(User, { through: "UserSeries" });
 
   Serie.hasMany(Episode, {});
@@ -25,7 +33,7 @@ const loadModels = () => {
   User.hasMany(TokenOperation);
   TokenOperation.belongsTo(User);
 
-  dbConnection.sync().then(() => console.log("Estamos en el aire🤯🤯!!!!"));
+  dbConnection.sync({force: true}).then(() => console.log("Estamos en el aire🤯🤯!!!!"));
 };
 
 module.exports = loadModels;

@@ -14,6 +14,10 @@ exports.getSerieById = async (id) => {
   return serie;
 };
 
+exports.getSerieByCategory = async(cate)=>{
+ return await serieRepository.findSerieByCategoryId(cate);
+}
+
 exports.searchSerieName = async (filter) => {
   return await serieRepository.searchSerie(filter);
 };
