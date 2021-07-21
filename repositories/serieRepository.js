@@ -12,6 +12,11 @@ exports.findSerieById = async (id) => {
   return await Serie.findByPk(id, {include: [{model: Episode}], order: [['episodes', 'number', 'ASC']]})
   };
 
+  exports.findSerieByCategoryId = async ({categoryId})=>{
+    return await Serie.findAll({ where: { categoryId } });
+
+  }
+
 exports.searchSerie = async (filter) => {
   const { title } = filter;
   return await Serie.findAll({ where: { title } });
