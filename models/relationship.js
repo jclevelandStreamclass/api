@@ -25,7 +25,7 @@ const loadModels = () => {
 
   Category.hasMany(Serie, {});
 
- Serie.belongsTo(Category);
+  Serie.belongsTo(Category);
 
   SportsPlayer.hasMany(Serie, {});
 
@@ -33,7 +33,9 @@ const loadModels = () => {
   User.hasMany(TokenOperation);
   TokenOperation.belongsTo(User);
 
-  dbConnection.sync({force: true}).then(() => console.log("Estamos en el aire🤯🤯!!!!"));
+  dbConnection
+    .sync()
+    .then(() => console.log("Estamos en el aire🤯🤯!!!!"));
 };
 
 module.exports = loadModels;
