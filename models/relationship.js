@@ -6,6 +6,7 @@ const Category = require("./Category");
 const SportsPlayer = require("./SportsPlayer");
 const User = require("./User");
 const TokenOperation = require("./TokenOperation");
+const UserSeries = require("./UserSeries");
 
 const loadModels = () => {
   User.hasMany(Serie, {});
@@ -26,7 +27,7 @@ const loadModels = () => {
   TokenOperation.belongsTo(User);
 
   dbConnection
-    .sync({ alter: true })
+    .sync()
     .then(() => console.log("Estamos en el aire🤯🤯!!!!"));
 };
 
