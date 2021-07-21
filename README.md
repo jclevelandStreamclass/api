@@ -4,7 +4,7 @@
 
 ## Descripción
 
-STREAMCLASS consiste en una aplicación para el aprendizaje de diferentes deportes. Estas serán impartidas por personalidades número uno en sus respectivos campos. Para ello se da a elegir una colección de clases de diferente grado de técnica y dificultad.
+STREAMCLASS consiste en una aplicación para el aprendizaje de diferentes deportes: vela, judo, fórmula 1, tenis... Estas serán impartidas por personalidades número uno en sus respectivos campos. Para ello se da a elegir una colección de clases de diferente grado de técnica y dificultad organizadas por categorías que agrupan según cada deporte.
 
 ---
 
