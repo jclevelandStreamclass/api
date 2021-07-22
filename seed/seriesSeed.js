@@ -9,9 +9,9 @@ const series = [
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. A vitae porro distinctio. Nesciunt mollitia harum porro fuga laborum nihil assumenda eaque expedita quam quia numquam, alias necessitatibus tenetur libero velit iure illum error vitae deserunt nulla! Magnam saepe pariatur dolorum expedita corporis, incidunt accusantium mollitia voluptates.",
     photo:
-      "https://res.cloudinary.com/madeleinetestcloud/image/upload/v1626434694/poseidon/lauren-forando-87mvOl39xmA-unsplash_rutcoa.jpg",
+      "https://res.cloudinary.com/madeleinetestcloud/image/upload/v1626434708/poseidon/ludomil-sawicki-lsXbZtrVSdQ-unsplash_yx4vjj.jpg",
     sportsPlayerId: "2",
-    categoryId: "1",
+    categoryId: "4",
   },
   {
     id: "2",
@@ -19,7 +19,7 @@ const series = [
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. A vitae porro distinctio. Nesciunt mollitia harum porro fuga laborum nihil assumenda eaque expedita quam quia numquam, alias necessitatibus tenetur libero velit iure illum error vitae deserunt nulla! Magnam saepe pariatur dolorum expedita corporis, incidunt accusantium mollitia voluptates.",
     photo:
-      "https://res.cloudinary.com/madeleinetestcloud/image/upload/v1626521042/poseidon/nathan-dumlao-QMhc3D_zwJ0-unsplash_ipblyd.jpg",
+      "https://res.cloudinary.com/madeleinetestcloud/image/upload/v1626978310/poseidon/emily-sea-coiWR0gT8Cw-unsplash_b82bmg.jpg",
     sportsPlayerId: "3",
     categoryId: "5",
   },
@@ -39,9 +39,29 @@ const series = [
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. A vitae porro distinctio. Nesciunt mollitia harum porro fuga laborum nihil assumenda eaque expedita quam quia numquam, alias necessitatibus tenetur libero velit iure illum error vitae deserunt nulla! Magnam saepe pariatur dolorum expedita corporis, incidunt accusantium mollitia voluptates.",
     photo:
-      "https://res.cloudinary.com/madeleinetestcloud/image/upload/v1626434702/poseidon/ian-keefe-o51ZmPzv95Q-unsplash_kxvhwe.jpg",
+      "https://res.cloudinary.com/madeleinetestcloud/image/upload/v1626978622/poseidon/ben-hershey-K9HgyI3qmqA-unsplash_uain9u.jpg",
     sportsPlayerId: "1",
-    categoryId: "7",
+    categoryId: "8",
+  },
+  {
+    id: "9",
+    title: "Tenis Competetivo",
+    description:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. A vitae porro distinctio. Nesciunt mollitia harum porro fuga laborum nihil assumenda eaque expedita quam quia numquam, alias necessitatibus tenetur libero velit iure illum error vitae deserunt nulla! Magnam saepe pariatur dolorum expedita corporis, incidunt accusantium mollitia voluptates.",
+    photo:
+      "https://res.cloudinary.com/madeleinetestcloud/image/upload/v1626978626/poseidon/john-fornander-4R9CcBdQTEg-unsplash_vothfx.jpg",
+    sportsPlayerId: "6",
+    categoryId: "8",
+  },
+  {
+    id: "10",
+    title: "Tenis Extreme",
+    description:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. A vitae porro distinctio. Nesciunt mollitia harum porro fuga laborum nihil assumenda eaque expedita quam quia numquam, alias necessitatibus tenetur libero velit iure illum error vitae deserunt nulla! Magnam saepe pariatur dolorum expedita corporis, incidunt accusantium mollitia voluptates.",
+    photo:
+      "https://res.cloudinary.com/madeleinetestcloud/image/upload/v1626978634/poseidon/renith-r-MLU_X1d3ofQ-unsplash_lza0r7.jpg",
+    sportsPlayerId: "7",
+    categoryId: "8",
   },
   {
     id: "5",
@@ -49,7 +69,7 @@ const series = [
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. A vitae porro distinctio. Nesciunt mollitia harum porro fuga laborum nihil assumenda eaque expedita quam quia numquam, alias necessitatibus tenetur libero velit iure illum error vitae deserunt nulla! Magnam saepe pariatur dolorum expedita corporis, incidunt accusantium mollitia voluptates.",
     photo:
-      "https://res.cloudinary.com/madeleinetestcloud/image/upload/v1626434702/poseidon/ian-keefe-o51ZmPzv95Q-unsplash_kxvhwe.jpg",
+      "https://res.cloudinary.com/madeleinetestcloud/image/upload/v1626980281/poseidon/max-winkler-UFIZodJgScQ-unsplash_cg1vam.jpg",
     sportsPlayerId: "2",
     categoryId: "5",
   },
@@ -59,19 +79,19 @@ const series = [
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. A vitae porro distinctio. Nesciunt mollitia harum porro fuga laborum nihil assumenda eaque expedita quam quia numquam, alias necessitatibus tenetur libero velit iure illum error vitae deserunt nulla! Magnam saepe pariatur dolorum expedita corporis, incidunt accusantium mollitia voluptates.",
     photo:
-      "https://res.cloudinary.com/madeleinetestcloud/image/upload/v1626434702/poseidon/ian-keefe-o51ZmPzv95Q-unsplash_kxvhwe.jpg",
+      "https://res.cloudinary.com/madeleinetestcloud/image/upload/v1626980349/poseidon/tomasz-krawczyk-M2x3A8Q4JbY-unsplash_wvpnmb.jpg",
     sportsPlayerId: "3",
     categoryId: "2",
   },
   {
     id: "7",
-    title: "Enseña Baloncesto",
+    title: "Enseña Judo",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. A vitae porro distinctio. Nesciunt mollitia harum porro fuga laborum nihil assumenda eaque expedita quam quia numquam, alias necessitatibus tenetur libero velit iure illum error vitae deserunt nulla! Magnam saepe pariatur dolorum expedita corporis, incidunt accusantium mollitia voluptates.",
     photo:
-      "https://res.cloudinary.com/madeleinetestcloud/image/upload/v1626434702/poseidon/ian-keefe-o51ZmPzv95Q-unsplash_kxvhwe.jpg",
-    sportsPlayerId: "4",
-    categoryId: "2",
+      "https://res.cloudinary.com/madeleinetestcloud/image/upload/v1626977418/poseidon/samuel-castro-MS_RP-Lba0U-unsplash_nzpyqi.jpg",
+    sportsPlayerId: "5",
+    categoryId: "1",
   },
   {
     id: "8",
@@ -79,7 +99,7 @@ const series = [
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. A vitae porro distinctio. Nesciunt mollitia harum porro fuga laborum nihil assumenda eaque expedita quam quia numquam, alias necessitatibus tenetur libero velit iure illum error vitae deserunt nulla! Magnam saepe pariatur dolorum expedita corporis, incidunt accusantium mollitia voluptates.",
     photo:
-      "https://res.cloudinary.com/madeleinetestcloud/image/upload/v1626434702/poseidon/ian-keefe-o51ZmPzv95Q-unsplash_kxvhwe.jpg",
+      "https://res.cloudinary.com/madeleinetestcloud/image/upload/v1626980524/poseidon/muktasim-azlan-pPfOLOK0oeI-unsplash_n8eiah.jpg",
     sportsPlayerId: "2",
     categoryId: "5",
   },
