@@ -9,7 +9,7 @@ exports.findAllSeries = async () => {
 };
 
 exports.findSerieById = async (id) => {
-  return await Serie.findByPk(id, {include: [{model: Episode}], order: [['episodes', 'number', 'ASC']]})
+  return await Serie.findByPk(id, {include: [{model: Episode, attributes: ['id', 'number', 'title', 'duration', 'photo']}], order: [['episodes', 'number', 'ASC']]})
   };
 
   exports.findSerieByCategoryId = async ({categoryId})=>{
