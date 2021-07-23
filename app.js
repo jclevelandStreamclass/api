@@ -11,6 +11,7 @@ const seriesRouter = require("./routes/series");
 const episodesRouter = require("./routes/episodes");
 const categoryRouter = require("./routes/category");
 const sportsPlayerRouter = require("./routes/sportsPlayer");
+const videoRouter = require('./routes/videos')
 const tokenValidation = require("./middlewares/tokenValidation");
 const errorHandler = require("./middlewares/errorHandler");
 
@@ -35,6 +36,7 @@ app.use("/series", seriesRouter);
 app.use("/episodes", episodesRouter);
 app.use("/sportsPlayer", sportsPlayerRouter);
 app.use("/categories", categoryRouter);
+app.use("/videos", videoRouter);
 
 app.use(errorHandler);
 module.exports = app;
