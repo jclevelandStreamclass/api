@@ -23,21 +23,17 @@ exports.getUserByEmail = async (email) => {
 };
 
 exports.signUp = async (userData) => {
+  // console.log(userData);
   const validateUser = await insertUserSchema.validateAsync(userData);
+
   const encryptedPassword = await encryptPassword(validateUser.password);
-
-  // // TE DEJO EL EDIT EL LOGIN Y EL DELETE
-  // const email = userData.email;
-  // const emailMessage = `< !DOCTYPE html PUBLIC “-//W3C//DTD XHTML 1.0 Transitional//EN” “https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd”><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-  //   <html xmlns=”https://www.w3.org/1999/xhtml”>`;
-  // const emailSubjectLine = "Confirmar email";
-
-  // await sendConfirmationMail(email, emailMessage, emailSubjectLine);
 
   const user = await userRepository.insertUser({
     ...validateUser,
     password: encryptedPassword,
   });
+
+  console.log(user);
   const tokenOperation = await tokenRepository.createTokenOperation({
     userId: user.toJSON().id,
     operation: "ACTIVATION",

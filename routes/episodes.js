@@ -22,17 +22,7 @@ router.get("/search:title?", async (req, res, next)=> {
     }
   })
 
-  
-router.get('/:id',  async (req, res) => {
-    try {
-        const { id } = req.params;
-        const episode = await episodeService.getEpisodeById(id);
-        res.status(200).json(episode);
-    } catch (error) {
-        res.status(404).json({ message: error.message })
-    }
 
-});
 
 
 router.get('/totaltime/:seriesId', async (req, res) => {
