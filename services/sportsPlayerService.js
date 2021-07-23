@@ -10,6 +10,10 @@ exports.getSportsPlayer = async (id) => {
   return sportsPlayer;
 };
 
+exports.searchSportPlayer = async (filter) => {
+  return await SportsPlayerRepository.findSportPlayerSeries(filter);
+};
+
 exports.createSportsPlayer = async (sportsPlayer) => {
   if (!sportsPlayer) {
     throw new Error();
