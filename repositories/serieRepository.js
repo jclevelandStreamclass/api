@@ -16,7 +16,7 @@ exports.findSerieById = async (id) => {
   };
 
   exports.findSerieByCategoryId = async ({categoryId})=>{
-    return await Serie.findAll({ where: { categoryId } });
+    return await Serie.findAll({ include: [{ model: SportsPlayer, attributes: ['name'] }],  where: { categoryId } });
 
   }
 
