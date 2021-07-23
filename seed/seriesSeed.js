@@ -7,7 +7,7 @@ const series = [
     id: "1",
     title: "Enseña Vela",
     description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. A vitae porro distinctio. Nesciunt mollitia harum porro fuga laborum nihil assumenda eaque expedita quam quia numquam, alias necessitatibus tenetur libero velit iure illum error vitae deserunt nulla! Magnam saepe pariatur dolorum expedita corporis, incidunt accusantium mollitia voluptates.",
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. A vitae porro distinctio.",
     photo:
       "https://res.cloudinary.com/madeleinetestcloud/image/upload/v1626434708/poseidon/ludomil-sawicki-lsXbZtrVSdQ-unsplash_yx4vjj.jpg",
     sportsPlayerId: "2",
@@ -47,7 +47,7 @@ const series = [
     id: "9",
     title: "Tenis Competetivo",
     description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. A vitae porro distinctio. Nesciunt mollitia harum porro fuga laborum nihil assumenda eaque expedita quam quia numquam, alias necessitatibus tenetur libero velit iure illum error vitae deserunt nulla! Magnam saepe pariatur dolorum expedita corporis, incidunt accusantium mollitia voluptates.",
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. A vitae porro distinctio.",
     photo:
       "https://res.cloudinary.com/madeleinetestcloud/image/upload/v1626978626/poseidon/john-fornander-4R9CcBdQTEg-unsplash_vothfx.jpg",
     sportsPlayerId: "6",
