@@ -23,7 +23,6 @@ router.get("/search:name?", async (req, res, next)=> {
 
 router.get("/:id", async (req, res, next) => {
   try {
-    console.log('pedo')
     const { id } = req.params;
     const category = await categoryServices.getCategory(id);
     res.status(200).json(category);

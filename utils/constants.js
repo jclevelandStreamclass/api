@@ -10,7 +10,13 @@ exports.CATEGORY = Object.freeze({
 exports.ROLE = Object.freeze({
   ADMIN: "admin",
   USER: "user",
+  PREMIUM: "premium",
 });
+
+exports.ACTIVITY = Object.freeze({
+  ACTIVE: "Activo",
+  INACTIVE: "Inactivo",
+})
 
 exports.INVALID_ACCOUNT = "You must activate your account";
 exports.NO_USER_DATA_PROVIDED =
