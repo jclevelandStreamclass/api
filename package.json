@@ -5,10 +5,10 @@
   "scripts": {
     "start": "node ./bin/www",
     "start:dev": "nodemon ./bin/www",
-    "seed": "node ./utils/userSeed.js",
-    "seed3": "node ./seed/seriesSeed",
+    "seed": "node ./seed/userSeed.js",
     "seed1": "node ./seed/categorySeed",
     "seed2": "node ./seed/sportPlayerSeed.js",
+    "seed3": "node ./seed/seriesSeed",
     "seed4": "node ./seed/episodeSeed.js"
   },
   "dependencies": {
