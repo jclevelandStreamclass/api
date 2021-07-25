@@ -7,7 +7,7 @@ const { Sequelize } = require("sequelize");
 exports.findAllSeries = async () => {
   return await Serie.findAll({
     include: [{ model: Episode, attributes: ['id', 'number', 'title', 'duration', 'photo'] },
-    { model: SportsPlayer, attributes: ['name'] }]
+    { model: SportsPlayer, attributes: ['name', 'photo'] }]
   });
 };
 
@@ -16,7 +16,7 @@ exports.findSerieById = async (id) => {
   };
 
   exports.findSerieByCategoryId = async ({categoryId})=>{
-    return await Serie.findAll({ include: [{ model: SportsPlayer, attributes: ['name'] }],  where: { categoryId } });
+    return await Serie.findAll({ include: [{ model: SportsPlayer, attributes: ['name', 'photo'] }],  where: { categoryId } });
 
   }
 
