@@ -2,6 +2,7 @@ var express = require("express");
 var router = express.Router();
 const userService = require("../services/userService");
 const roleValidation = require("../middlewares/roleValidation");
+const multer = require("../middlewares/multer");
 
 router.get("/", roleValidation("admin"), async (req, res) => {
   try {
@@ -32,8 +33,10 @@ router.get("/activate/:id", async (req, res, next) => {
   }
 });
 
-router.post("/signup", async (req, res, next) => {
+router.post("/signup", multer.single("avatar"), async (req, res, next) => {
   try {
+    console.log(req.files);
+    console.log(req.file);
     await userService.signUp(req.body);
     res.status(201).json(req.body);
   } catch (err) {
@@ -50,8 +53,11 @@ router.post("/login", async (req, res, next) => {
   }
 });
 
-router.put("/:id", async (req, res) => {
+router.put("/:id", multer.single("avatar"), async (req, res) => {
   try {
+    if (req.file) {
+      req.body.avatar = req.file.path;
+    }
     const { id } = req.params;
     await userService.editUser(id, req.body);
     const user = await userService.getUserById(id);
