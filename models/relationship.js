@@ -34,9 +34,7 @@ const loadModels = () => {
   User.hasMany(TokenOperation);
   TokenOperation.belongsTo(User);
 
-  dbConnection
-    .sync()
-    .then(() => console.log("Estamos en el aire🤯🤯!!!!"));
+  dbConnection.sync().then(() => console.log("Estamos en el aire🤯🤯!!!!"));
 };
 
 module.exports = loadModels;

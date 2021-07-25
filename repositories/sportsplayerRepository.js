@@ -1,3 +1,4 @@
+const { Op } = require("sequelize");
 const Serie = require("../models/Serie");
 const SportsPlayer = require("../models/SportsPlayer");
 
@@ -16,7 +17,11 @@ exports.findSportsPlayerById = async (id) => {
 exports.findSportPlayerSeries = async (filter) => {
   const { name } = filter;
   return await SportsPlayer.findAll({
-    where: { name },
+    where: {
+      name: {
+        [Op.like]: `%${name}%`,
+      },
+    },
     include: [{ model: Serie, attributes: ["id", "title"] }],
   });
 };
