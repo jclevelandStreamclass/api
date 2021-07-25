@@ -82,6 +82,46 @@ const episodes = [
             "https://res.cloudinary.com/madeleinetestcloud/image/upload/v1626978622/poseidon/ben-hershey-K9HgyI3qmqA-unsplash_uain9u.jpg",
         video: "https://player.vimeo.com/video/573031486",
         serieId: "4"
+    },
+     {
+        number: 5,
+        title: "Introducción",
+        duration: '00:18:23',
+        description: "Tenis 1.",
+        photo:
+            "https://res.cloudinary.com/madeleinetestcloud/image/upload/v1626978634/poseidon/renith-r-MLU_X1d3ofQ-unsplash_lza0r7.jpg",
+        video: "https://player.vimeo.com/video/573031486",
+        serieId: "4"
+    },
+    {
+        number: 6,
+        title: "Buscando el rumbo",
+        duration: '00:23:00',
+        description: "Tenis 2.",
+        photo:
+            "https://res.cloudinary.com/madeleinetestcloud/image/upload/v1626978633/poseidon/josephine-gasser-cv83wpGtFtg-unsplash_fakgfs.jpg",
+        video: "https://player.vimeo.com/video/573031486",
+        serieId: "4"
+    },
+    {
+        number: 7,
+        title: "Racing",
+        duration: '00:13:40',
+        description: "Tenis 3.",
+        photo:
+            "https://res.cloudinary.com/madeleinetestcloud/image/upload/v1626978626/poseidon/john-fornander-4R9CcBdQTEg-unsplash_vothfx.jpg",
+        video: "https://player.vimeo.com/video/573031486",
+        serieId: "4"
+    },
+    {
+        number: 8,
+        title: "Nomenclatura",
+        duration: '00:17:40',
+        description: "Tenis 4.",
+        photo:
+            "https://res.cloudinary.com/madeleinetestcloud/image/upload/v1626978622/poseidon/ben-hershey-K9HgyI3qmqA-unsplash_uain9u.jpg",
+        video: "https://player.vimeo.com/video/573031486",
+        serieId: "4"
     }
 ];
 
