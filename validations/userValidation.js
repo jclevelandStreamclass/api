@@ -15,5 +15,5 @@ exports.updateUserSchema = Joi.object({
   name: Joi.string().max(150),
   avatar: Joi.string(),
   phone: Joi.string().max(12),
-  role: Joi.string()
+  role: Joi.string(),
 });

@@ -103,11 +103,10 @@ exports.editUser = async (id, userData) => {
     validateUser.password = await encryptPassword(validateUser.password);
   }
 
-  let updateUser = await userRepository.updateUser(id, validateUser);
-  
+  const updateUser = await userRepository.updateUser(id, validateUser);
+
   if (userData.role) {
-    let foundUser = await userRepository.findUserById(id);
-    console.log(1, foundUser, 'founduser')
+    const foundUser = await userRepository.findUserById(id);
     const token = generateToken({
       id: foundUser.id,
       email: foundUser.email,
@@ -116,20 +115,21 @@ exports.editUser = async (id, userData) => {
       role: foundUser.role,
       active: foundUser.active,
     });
-    foundUser = {
+
+    const userDetails = {
       id: foundUser.id,
+      bearer: token,
       email: foundUser.email,
       name: foundUser.name,
       phone: foundUser.phone,
       role: foundUser.role,
       active: foundUser.active,
-      bearer: token
-    }
-    console.log(2, foundUser)
-    return foundUser;
-    
+      avatar: foundUser.avatar,
+    };
+
+    return userDetails;
   }
-  console.log(3, foundUser)
+
   return updateUser;
 };
 
