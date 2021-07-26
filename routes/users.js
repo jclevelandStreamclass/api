@@ -67,6 +67,20 @@ router.put("/:id", multer.single("avatar"), async (req, res) => {
   }
 });
 
+router.put("/plan/:id", multer.single("avatar"), async (req, res) => {
+  try {
+    if (req.file) {
+      req.body.avatar = req.file.path;
+    }
+    const { id } = req.params;
+
+    const user = await userService.editUser(id, req.body);
+    res.status(200).json(user);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+});
+
 router.delete("/:id", async (req, res) => {
   try {
     const { id } = req.params;

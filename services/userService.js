@@ -105,6 +105,31 @@ exports.editUser = async (id, userData) => {
 
   const updateUser = await userRepository.updateUser(id, validateUser);
 
+  if (userData.role) {
+    const foundUser = await userRepository.findUserById(id);
+    const token = generateToken({
+      id: foundUser.id,
+      email: foundUser.email,
+      name: foundUser.name,
+      phone: foundUser.phone,
+      role: foundUser.role,
+      active: foundUser.active,
+    });
+
+    const userDetails = {
+      id: foundUser.id,
+      bearer: token,
+      email: foundUser.email,
+      name: foundUser.name,
+      phone: foundUser.phone,
+      role: foundUser.role,
+      active: foundUser.active,
+      avatar: foundUser.avatar,
+    };
+
+    return userDetails;
+  }
+
   return updateUser;
 };
 
