@@ -51,6 +51,7 @@ router.post("/login", async (req, res, next) => {
 });
 
 router.put("/:id", async (req, res) => {
+  console.log(req.body);
   try {
     const { id } = req.params;
     await userService.editUser(id, req.body);
