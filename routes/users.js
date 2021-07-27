@@ -35,8 +35,6 @@ router.get("/activate/:id", async (req, res, next) => {
 
 router.post("/signup", multer.single("avatar"), async (req, res, next) => {
   try {
-    console.log(req.files);
-    console.log(req.file);
     await userService.signUp(req.body);
     res.status(201).json(req.body);
   } catch (err) {
@@ -61,7 +59,6 @@ router.put("/:id", multer.single("avatar"), async (req, res) => {
     const { id } = req.params;
     await userService.editUser(id, req.body);
     const user = await userService.getUserById(id);
-    console.log(user)
     res.status(200).json(user);
   } catch (err) {
     res.status(400).json({ message: err.message });
@@ -74,9 +71,7 @@ router.put("/plan/:id", async (req, res) => {
       req.body.avatar = req.file.path;
     }
     const { id } = req.params;
-    
     const user = await userService.editUser(id, req.body);
-    console.log(user)
     res.status(200).json(user);
   } catch (err) {
     res.status(400).json({ message: err.message });
