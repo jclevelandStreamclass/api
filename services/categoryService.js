@@ -1,10 +1,12 @@
 const categoryRepository = require("../repositories/categoryRepository");
 const HttpError = require("../utils/httpError");
-const { updateCategorySchema } = require("../validations/categoryValidation");
+const { updateCategorySchema, insertCategorySchema } = require("../validations/categoryValidation");
+const ERRORS = require('../utils/constants');
 
 exports.getCategory = async (id) => {
   const category = await categoryRepository.findCategoryById(id);
-  return category.toJSON();
+  if (!category) throw new HttpError(404, ERRORS.INVALID_CATEGORY)
+  return category;
 };
 
 exports.getAllCategories = async () => {
@@ -16,20 +18,31 @@ exports.searchCategoryName = async (filter) => {
 }
 
 exports.createCategory = async (category) => {
-  if (!category.name) {
-    throw new HttpError(400, "Miss name");
+  const { name, photo } = category;
+  if (!name || !photo) {
+    throw new HttpError(400, ERRORS.INVALID_DATA);
   }
-  await categoryRepository.insertCategory(category);
+  try {
+    await insertCategorySchema.validateAsync(category);
+  } catch (error) {
+    throw new HttpError(400, ERRORS.INVALID_DATA)
+  }
+  return await categoryRepository.insertCategory(category);
 };
 
 exports.editCategory = async (categoryDetails, categoryId) => {
   const category = await categoryRepository.findCategoryById(categoryId);
-  const validatioData = await updateCategorySchema.validateAsync(
-    categoryDetails
-  );
-  await categoryRepository.updateCategory(categoryId, validatioData);
+  if (!category) throw new HttpError(404, ERRORS.INVALID_CATEGORY)
+  try {
+    await updateCategorySchema.validateAsync(categoryDetails);
+  } catch (error) {
+    throw new HttpError(400, ERRORS.INVALID_DATA)
+  }
+  return await categoryRepository.updateCategory(categoryId, categoryDetails);
 };
 
 exports.removeCategory = async (id) => {
-  await categoryRepository.deleteCategory(id);
+  const foundCategory = await categoryRepository.findCategoryById(id);
+  if (!foundCategory) throw new HttpError(404, ERRORS.INVALID_CATEGORY);
+  return await categoryRepository.deleteCategory(id);
 };

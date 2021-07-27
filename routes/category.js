@@ -33,9 +33,8 @@ router.get("/:id", async (req, res, next) => {
 
 
 
-//router.post("/", roleValidation("admin"), async (req, res, next) => {
-  router.post("/",  async (req, res, next) => {
-  try {
+router.post("/private/", roleValidation(), async (req, res, next) => {
+    try {
     await categoryServices.createCategory(req.body);
     res.sendStatus(201);
   } catch (error) {
@@ -43,7 +42,7 @@ router.get("/:id", async (req, res, next) => {
   }
 });
 
-router.put("/:id", roleValidation("admin"), async (req, res, next) => {
+router.put("/private/:id", roleValidation(), async (req, res, next) => {
   try {
     const { id } = req.params;
     await categoryServices.editCategory(req.body, id);
@@ -53,7 +52,7 @@ router.put("/:id", roleValidation("admin"), async (req, res, next) => {
   }
 });
 
-router.delete("/:id", roleValidation("admin"), async (req, res) => {
+router.delete("/private/:id", roleValidation(), async (req, res, next) => {
   try {
     const { id } = req.params;
     await categoryServices.removeCategory(id);
