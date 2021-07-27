@@ -4,7 +4,7 @@
 
 ## Descripción
 
-STREAMCLASS consiste en una aplicación para el aprendizaje de diferentes deportes. Estas serán impartidas por personalidades número uno en sus respectivos campos. Para ello se da a elegir una colección de clases de diferente grado de técnica y dificultad.
+STREAMCLASS consiste en una aplicación para el aprendizaje de diferentes deportes: vela, judo, fórmula 1, tenis... Estas serán impartidas por personalidades número uno en sus respectivos campos. Para ello se da a elegir una colección de clases de diferente grado de técnica y dificultad organizadas por categorías que agrupan según cada deporte.
 
 ---
 
@@ -36,27 +36,27 @@ necesarias para la funcionalidad del proyecto.
 Solo necesitas introducir el comando `npm i` o bien `npm install` en la terminal de tu IDE para
 su instalación.
 
-|Name|
-|----|
-|cloudinary|
-|cookie-parser|
-|debug|
-|dotenv|
-|express|
-|joi|
-|morgan|
-|multer|
-|multer-storage-cloudinary|
-|mysql2|
-|nodemailer|
-|sequelize|
-|jsonwebtoken|
+| Name                      |
+| ------------------------- |
+| cloudinary                |
+| cookie-parser             |
+| debug                     |
+| dotenv                    |
+| express                   |
+| joi                       |
+| morgan                    |
+| multer                    |
+| multer-storage-cloudinary |
+| mysql2                    |
+| nodemailer                |
+| sequelize                 |
+| jsonwebtoken              |
 
 Dependencias para desarrolladores
 
-|Name|
-|----|
-|cloudinary|
+| Name       |
+| ---------- |
+| cloudinary |
 
 Tienes una descripción de cada una de ellas disponible en [NPM](https://www.npmjs.com/)
 
