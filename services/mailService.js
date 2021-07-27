@@ -9,7 +9,7 @@ exports.sendConfirmationMail = async ({ email, text, subject }) => {
   const mailConfig = await loadConfig();
   const transport = nodemailer.createTransport(mailConfig);
   const message = {
-    from: "miguelbermell92@gmail.com",
+    from: "stream.node@gmail.com",
     to: email,
     //should be client email
     subject,
