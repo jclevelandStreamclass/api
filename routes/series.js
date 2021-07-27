@@ -26,7 +26,6 @@ router.get("/search:title?", async (req, res, next)=> {
 router.get("/find:categoryId?", async(req, res, next)=>{
   try {
     const post = await serieService.getSerieByCategory(req.query);
-    console.log(req.query)
     res.status(200).json(post);
   } catch (error) {
     next(error)
