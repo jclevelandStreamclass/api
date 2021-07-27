@@ -7,5 +7,4 @@ class HttpError extends Error {
     this.message = message || STATUS_CODES[this.statusCode];
   }
 }
-
 module.exports = HttpError;
