@@ -3,7 +3,8 @@ const roleValidation = require("../middlewares/roleValidation");
 var router = express.Router();
 const episodeService = require("../services/episodeService");
 
-router.get("/", async (req, res) => {
+
+router.get("/", async (req, res, next) => {
   try {
     const episodes = await episodeService.getAllEpisodes();
     res.status(200).json(episodes);
@@ -21,7 +22,17 @@ router.get("/search:title?", async (req, res, next) => {
   }
 });
 
-router.get("/totaltime/:seriesId", async (req, res) => {
+router.get("/private/:id", roleValidation("premium"), async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const episode = await episodeService.getEpisodeById(id);
+    res.status(200).json(episode);
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.get("/totaltime/:seriesId", async (req, res, next) => {
   try {
     const { seriesId } = req.params;
     const totaltime = await episodeService.getSumEpisodeDurationBySerieId(
@@ -34,7 +45,7 @@ router.get("/totaltime/:seriesId", async (req, res) => {
 });
 
 //solo admin puede crear, editar y eliminar
-router.post("/", roleValidation(), async (req, res) => {
+router.post("/private/", roleValidation(), async (req, res, next) => {
   try {
     const episode = await episodeService.createEpisode(req.body);
     res.status(200).json(episode);
@@ -43,7 +54,7 @@ router.post("/", roleValidation(), async (req, res) => {
   }
 });
 
-router.put("/:id", roleValidation(),  async (req, res) => {
+router.put("/private/:id", roleValidation(),  async (req, res, next) => {
   try {
     const { id } = req.params;
     const editedEpisdoe = await episodeService.editEpisode(id, req.body);
@@ -53,7 +64,7 @@ router.put("/:id", roleValidation(),  async (req, res) => {
   }
 });
 
-router.delete("/:id", roleValidation(),  async (req, res) => {
+router.delete("/private/:id", roleValidation(),  async (req, res, next) => {
   try {
     const { id } = req.params;
     const destroyedRow = await episodeService.removeEpisode(id);

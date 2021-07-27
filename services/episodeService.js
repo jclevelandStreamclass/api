@@ -2,21 +2,21 @@ const episodeRepository = require("../repositories/episodeRepository");
 const HttpError = require('../utils/httpError');
 const ERRORS = require('../utils/constants');
 const { insertEpisodeSchema, updateEpisodeSchema } = require('../validations/episodeValidations');
-
+const serieRespository = require('../repositories/serieRepository')
 
 exports.createEpisode = async (episode) => {
-    
-    const { title, duration, description, photo, video } = episode;
-    if (!title || !duration || !description || !photo || !video) {
-        throw new HttpError(400, ERRORS.INVALID_DATA)
-    }
-    try {
-        await insertEpisodeSchema.validateAsync(episode);
-       
-    } catch (error) {
-        throw new HttpError(400, ERRORS.INVALID_DATA)
-    }
-    return await episodeRepository.insertEpisode(episode);
+
+  const { title, duration, description, photo, video } = episode;
+  if (!title || !duration || !description || !photo || !video) {
+    throw new HttpError(400, ERRORS.INVALID_DATA)
+  }
+  try {
+    await insertEpisodeSchema.validateAsync(episode);
+
+  } catch (error) {
+    throw new HttpError(400, ERRORS.INVALID_DATA)
+  }
+  return await episodeRepository.insertEpisode(episode);
 };
 
 exports.getAllEpisodes = async () => {
@@ -24,11 +24,16 @@ exports.getAllEpisodes = async () => {
 };
 
 exports.getEpisodeById = async (id) => {
-  return await episodeRepository.findEpisodeById(id);
+  const foundEpisode = await episodeRepository.findEpisodeById(id);
+  if (!foundEpisode) throw new HttpError(404, ERRORS.INVALID_ID)
+  return foundEpisode;
 };
 
 exports.getSumEpisodeDurationBySerieId = async (searchSerieId) => {
-  return await episodeRepository.findSumDurationEpisodes(searchSerieId);
+  const foundSerie = await serieRespository.findSerieById(searchSerieId);
+  if (!foundSerie) throw new HttpError(404, ERRORS.INVALID_SERIE)
+  const totaltime = await episodeRepository.findSumDurationEpisodes(searchSerieId);
+  return totaltime;
 };
 
 exports.searchEpisodeName = async (filter) => {
@@ -37,9 +42,7 @@ exports.searchEpisodeName = async (filter) => {
 
 exports.removeEpisode = async (id) => {
   const foundEpisode = await episodeRepository.findEpisodeById(id);
-  if (!foundEpisode) {
-    throw new HttpError(404, ERRORS.INVALID_EPISODE);
-  }
+  if (!foundEpisode) throw new HttpError(404, ERRORS.INVALID_EPISODE);
   return await episodeRepository.deleteEpisode(id);
 };
 
