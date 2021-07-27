@@ -53,10 +53,7 @@ router.post("/login", async (req, res, next) => {
   }
 });
 
-
-=======
 router.put("/:id", multer.single("avatar"), async (req, res) => {
->>>>>>> 4ae524ece23785405e17e36212f819b6776ab37d
   try {
     if (req.file) {
       req.body.avatar = req.file.path;
