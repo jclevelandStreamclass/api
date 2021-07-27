@@ -32,7 +32,6 @@ exports.signUp = async (userData) => {
     password: encryptedPassword,
   });
 
-  console.log(user);
   const tokenOperation = await tokenRepository.createTokenOperation({
     userId: user.toJSON().id,
     operation: "ACTIVATION",
