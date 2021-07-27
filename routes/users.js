@@ -2,6 +2,7 @@ var express = require("express");
 var router = express.Router();
 const userService = require("../services/userService");
 const roleValidation = require("../middlewares/roleValidation");
+const multer = require("../middlewares/multer");
 
 router.get("/", roleValidation("admin"), async (req, res) => {
   try {
@@ -32,10 +33,10 @@ router.get("/activate/:id", async (req, res, next) => {
   }
 });
 
-router.post("/signup", async (req, res, next) => {
+router.post("/signup", multer.single("avatar"), async (req, res, next) => {
   try {
     await userService.signUp(req.body);
-    res.sendStatus(201);
+    res.status(201).json(req.body);
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
@@ -50,11 +51,27 @@ router.post("/login", async (req, res, next) => {
   }
 });
 
-router.put("/:id", async (req, res) => {
+router.put("/:id", multer.single("avatar"), async (req, res) => {
   try {
+    if (req.file) {
+      req.body.avatar = req.file.path;
+    }
     const { id } = req.params;
     await userService.editUser(id, req.body);
     const user = await userService.getUserById(id);
+    res.status(200).json(user);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+});
+
+router.put("/plan/:id", async (req, res) => {
+  try {
+    if (req.file) {
+      req.body.avatar = req.file.path;
+    }
+    const { id } = req.params;
+    const user = await userService.editUser(id, req.body);
     res.status(200).json(user);
   } catch (err) {
     res.status(400).json({ message: err.message });

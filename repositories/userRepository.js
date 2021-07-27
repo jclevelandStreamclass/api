@@ -1,5 +1,5 @@
+const { Op } = require("sequelize");
 const User = require("../models/User");
-
 exports.findAllUsers = async () => {
   return await User.findAll();
 };
@@ -13,7 +13,11 @@ exports.findUserByEmail = async (email) => {
 };
 
 exports.findUserWithPasswordByEmail = async (email) => {
-  return await User.scope("withPassword").findOne({ where: { email } });
+  return await User.scope("withPassword").findOne({
+    where: {
+      [Op.or]: [{ phone: email }, { email }],
+    },
+  });
 };
 
 exports.insertUser = async (usuario) => {

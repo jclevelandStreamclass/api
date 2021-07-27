@@ -2,7 +2,10 @@ const userRepository = require("../repositories/userRepository");
 const encryptPassword = require("../utils/encryptPassword");
 const HttpError = require("../utils/httpError");
 const { generateToken } = require("./jwtServices");
-const { insertUserSchema } = require("../validations/userValidation");
+const {
+  insertUserSchema,
+  updateUserSchema,
+} = require("../validations/userValidation");
 const tokenRepository = require("../repositories/tokenOperationRepository");
 const mailService = require("../services/mailService");
 
@@ -21,28 +24,21 @@ exports.getUserByEmail = async (email) => {
 
 exports.signUp = async (userData) => {
   const validateUser = await insertUserSchema.validateAsync(userData);
+
   const encryptedPassword = await encryptPassword(validateUser.password);
-
-  // // TE DEJO EL EDIT EL LOGIN Y EL DELETE
-  // const email = userData.email;
-  // const emailMessage = `< !DOCTYPE html PUBLIC “-//W3C//DTD XHTML 1.0 Transitional//EN” “https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd”><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-  //   <html xmlns=”https://www.w3.org/1999/xhtml”>`;
-  // const emailSubjectLine = "Confirmar email";
-
-  // await sendConfirmationMail(email, emailMessage, emailSubjectLine);
 
   const user = await userRepository.insertUser({
     ...validateUser,
     password: encryptedPassword,
   });
+
+  console.log(user);
   const tokenOperation = await tokenRepository.createTokenOperation({
     userId: user.toJSON().id,
     operation: "ACTIVATION",
   });
 
-  const text = `http://localhost:3000/users/activate/${
-    tokenOperation.toJSON().id
-  }`;
+  const text = `http://localhost:4200/login/${tokenOperation.toJSON().id}`;
   const subject = "Activate your account";
   const email = user.email;
 
@@ -64,34 +60,67 @@ exports.login = async ({ email, password }) => {
   if (!user) throw new Error("Not found user");
 
   const encryptedPassword = await encryptPassword(password);
-console.log(password)
-console.log(encryptedPassword)
   if (user.password !== encryptedPassword) throw new Error("Wrong password");
-console.log(user.name)
   const token = generateToken({
     id: user.id,
     email: user.email,
-    name:user.name,
+    name: user.name,
     phone: user.phone,
     role: user.role,
     active: user.active,
   });
-  console.log(user.name)
 
-  return token;
+  const userDetails = {
+    id: user.id,
+    bearer: token,
+    email: user.email,
+    name: user.name,
+    phone: user.phone,
+    role: user.role,
+    active: user.active,
+    avatar: user.avatar,
+  };
+  return userDetails;
 };
 
 exports.editUser = async (id, userData) => {
-  const validateUser = await insertUserSchema.validateAsync(userData);
+  const user = await userRepository.findUserById(id);
+  if (!user) throw new Error("User not found");
+
+  const validateUser = await updateUserSchema.validateAsync(userData);
 
   if (validateUser.password) {
     validateUser.password = await encryptPassword(validateUser.password);
   }
 
-  // retornamos user??
-  const user = await userRepository.updateUser(id, validation);
+  const updateUser = await userRepository.updateUser(id, validateUser);
 
-  return user;
+  if (userData.role) {
+    const foundUser = await userRepository.findUserById(id);
+    const token = generateToken({
+      id: foundUser.id,
+      email: foundUser.email,
+      name: foundUser.name,
+      phone: foundUser.phone,
+      role: foundUser.role,
+      active: foundUser.active,
+    });
+
+    const userDetails = {
+      id: foundUser.id,
+      bearer: token,
+      email: foundUser.email,
+      name: foundUser.name,
+      phone: foundUser.phone,
+      role: foundUser.role,
+      active: foundUser.active,
+      avatar: foundUser.avatar,
+    };
+
+    return userDetails;
+  }
+
+  return updateUser;
 };
 
 exports.removeUser = async (id) => {

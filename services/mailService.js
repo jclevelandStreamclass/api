@@ -5,11 +5,11 @@ exports.sendConfirmationMail = async ({ email, text, subject }) => {
   if (!email || !subject || !text) {
     throw new Error("email incomplete");
   }
-  const url = "http://www.google.com";
+
   const mailConfig = await loadConfig();
   const transport = nodemailer.createTransport(mailConfig);
   const message = {
-    from: "test.node.madeleine@gmail.com",
+    from: "stream.node@gmail.com",
     to: email,
     //should be client email
     subject,

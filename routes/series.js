@@ -13,6 +13,26 @@ router.get("/", async (req, res, next) => {
   }
 });
 
+router.get("/search:title?", async (req, res, next)=> {
+  try {
+    const series = await serieService.searchSerieName(req.query);
+    res.status(200).json(series)
+  } catch (error) {
+    next(error)
+  }
+})
+
+
+router.get("/find:categoryId?", async(req, res, next)=>{
+  try {
+    const post = await serieService.getSerieByCategory(req.query);
+    console.log(req.query)
+    res.status(200).json(post);
+  } catch (error) {
+    next(error)
+  }
+})
+
 router.get("/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -23,8 +43,11 @@ router.get("/:id", async (req, res, next) => {
   }
 });
 
+
+
 // POST
-router.post("/", roleValidation("user"), async (req, res, next) => {
+//router.post("/", roleValidation("user"), async (req, res, next) => {
+  router.post("/",  async (req, res, next) => {
   try {
     const serie = await serieService.createSerie(req.body);
     res.status(200).json(serie);

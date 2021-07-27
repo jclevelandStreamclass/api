@@ -8,12 +8,14 @@ const Episode = dbConnection.define("episode", {
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,
   },
+  number: {
+    type: DataTypes.TINYINT
+  },
   title: {
     type: DataTypes.STRING(50),
   },
   duration: {
-    type: DataTypes.TIME,
-    //TODO check functionality
+    type: DataTypes.TIME,    
   },
   description: {
     type: DataTypes.STRING(500),
@@ -24,6 +26,10 @@ const Episode = dbConnection.define("episode", {
   video: {
     type: DataTypes.STRING,
   },
+  seen: {
+    type: DataTypes.INTEGER,
+    defaultValue: 0
+  }
 });
 
 module.exports = Episode;

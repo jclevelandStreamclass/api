@@ -12,6 +12,15 @@ router.get("/all", async (req, res, next) => {
   }
 });
 
+router.get("/search:name?", async (req, res, next)=> {
+  try {
+    const categories = await categoryServices.searchCategoryName(req.query);
+    res.status(200).json(categories)
+  } catch (error) {
+    next(error)
+  }
+})
+
 router.get("/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -22,7 +31,10 @@ router.get("/:id", async (req, res, next) => {
   }
 });
 
-router.post("/", roleValidation("admin"), async (req, res, next) => {
+
+
+//router.post("/", roleValidation("admin"), async (req, res, next) => {
+  router.post("/",  async (req, res, next) => {
   try {
     await categoryServices.createCategory(req.body);
     res.sendStatus(201);
@@ -41,7 +53,7 @@ router.put("/:id", roleValidation("admin"), async (req, res, next) => {
   }
 });
 
-router.delete("/:id",  roleValidation("admin"), async (req, res) => {
+router.delete("/:id", roleValidation("admin"), async (req, res) => {
   try {
     const { id } = req.params;
     await categoryServices.removeCategory(id);

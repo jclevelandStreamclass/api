@@ -12,6 +12,15 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.get("/search:name?", async (req, res, next) => {
+  try {
+    const sportplayers = await sportsPlayerService.searchSportPlayer(req.query);
+    res.status(200).json(sportplayers);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
 router.get("/:id", async (req, res) => {
   try {
     const { id } = req.params;
