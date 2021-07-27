@@ -49,7 +49,7 @@ const sportsPLayers = [
     bio: "Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen.",
     job: "Tennis player",
     photo:
-      "https://euskalkazeta.com/wp-content/uploads/2017/07/garbine-muguruza-hat-es-unter-die-besten-vier-geschafft-.jpg",
+      "https://imgresizer.eurosport.com/unsafe/1200x0/filters:format(jpeg):focal(1155x186:1157x184)/origin-imgresizer.eurosport.com/2021/07/02/3165853-64872508-2560-1440.jpg",
   },
   {
     id: "7",

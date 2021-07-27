@@ -23,7 +23,6 @@ exports.getUserByEmail = async (email) => {
 };
 
 exports.signUp = async (userData) => {
-  // console.log(userData);
   const validateUser = await insertUserSchema.validateAsync(userData);
 
   const encryptedPassword = await encryptPassword(validateUser.password);
@@ -38,10 +37,6 @@ exports.signUp = async (userData) => {
     userId: user.toJSON().id,
     operation: "ACTIVATION",
   });
-
-  // const text = `http://localhost:3000/users/activate/${
-  //   tokenOperation.toJSON().id
-  // }`;
 
   const text = `http://localhost:4200/login/${tokenOperation.toJSON().id}`;
   const subject = "Activate your account";
@@ -65,10 +60,7 @@ exports.login = async ({ email, password }) => {
   if (!user) throw new Error("Not found user");
 
   const encryptedPassword = await encryptPassword(password);
-  console.log(password);
-  console.log(encryptedPassword);
   if (user.password !== encryptedPassword) throw new Error("Wrong password");
-  console.log(user.name);
   const token = generateToken({
     id: user.id,
     email: user.email,
@@ -88,14 +80,12 @@ exports.login = async ({ email, password }) => {
     active: user.active,
     avatar: user.avatar,
   };
-  console.log(user.name);
-
   return userDetails;
 };
 
 exports.editUser = async (id, userData) => {
   const user = await userRepository.findUserById(id);
-  if (!user) throw new Error("Not found user");
+  if (!user) throw new Error("User not found");
 
   const validateUser = await updateUserSchema.validateAsync(userData);
 
