@@ -24,6 +24,7 @@ exports.NO_USER_DATA_PROVIDED =
 exports.INVALID_DATA = "Data provided is invalid";
 exports.INVALID_USER = "User does not exist";
 exports.INVALID_SERIE = "Series does not exist";
+exports.INVALID_CATEGORY = "Category does not exist";
 exports.INVALID_SPORTSPLAYER = "SportsPlayer does not exist";
 exports.INVALID_EPISODE = "Episode does not exist";
 exports.INVALID_PASSWORD = "Invalid password";
