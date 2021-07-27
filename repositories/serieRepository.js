@@ -31,7 +31,7 @@ exports.findSerieById = async (id) => {
 
 exports.findSerieByCategoryId = async ({ categoryId }) => {
   return await Serie.findAll({
-    include: [{ model: SportsPlayer, attributes: ["name"] }],
+    include: [{ model: SportsPlayer, attributes: ["name", "photo"] }],
     where: { categoryId },
   });
 };
