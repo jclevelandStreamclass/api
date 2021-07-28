@@ -5,14 +5,22 @@ exports.findAllCategories = async () => {
   return await Category.findAll();
 };
 
+// FIND LAST UPDATE --> QUERY
+exports.findAllCategoriesLastUpdate = async () => {
+  return await Category.findAll({
+    limit: [6],
+    order: [["createdAt", "DESC"]],
+  });
+};
+
 exports.findCategoryById = async (id) => {
   return await Category.findByPk(id, { include: Serie });
 };
 
 exports.searchCategory = async (filter) => {
-  const {name} = filter
-  return await Category.findAll({where: {name}});
-}
+  const { name } = filter;
+  return await Category.findAll({ where: { name } });
+};
 
 exports.insertCategory = async (category) => {
   return await Category.create(category);

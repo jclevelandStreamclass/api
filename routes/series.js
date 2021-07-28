@@ -13,24 +13,32 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-router.get("/search:title?", async (req, res, next)=> {
+router.get("/latest/Update", async (req, res, next) => {
+  try {
+    const series = await serieService.getAllSeriesLastUpdate();
+    res.status(200).json(series);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
+router.get("/search:title?", async (req, res, next) => {
   try {
     const series = await serieService.searchSerieName(req.query);
-    res.status(200).json(series)
+    res.status(200).json(series);
   } catch (error) {
-    next(error)
+    next(error);
   }
-})
+});
 
-
-router.get("/find:categoryId?", async(req, res, next)=>{
+router.get("/find:categoryId?", async (req, res, next) => {
   try {
     const post = await serieService.getSerieByCategory(req.query);
     res.status(200).json(post);
   } catch (error) {
-    next(error)
+    next(error);
   }
-})
+});
 
 router.get("/:id", async (req, res, next) => {
   try {
@@ -42,11 +50,9 @@ router.get("/:id", async (req, res, next) => {
   }
 });
 
-
-
 // POST
 //router.post("/", roleValidation("user"), async (req, res, next) => {
-  router.post("/",  async (req, res, next) => {
+router.post("/", async (req, res, next) => {
   try {
     const serie = await serieService.createSerie(req.body);
     res.status(200).json(serie);

@@ -9,14 +9,19 @@ exports.getAllSeries = async () => {
   return series;
 };
 
+exports.getAllSeriesLastUpdate = async () => {
+  const series = await serieRepository.findAllSeriesLastUpdate();
+  return series;
+};
+
 exports.getSerieById = async (id) => {
   const serie = await serieRepository.findSerieById(id);
   return serie;
 };
 
-exports.getSerieByCategory = async(cate)=>{
- return await serieRepository.findSerieByCategoryId(cate);
-}
+exports.getSerieByCategory = async (cate) => {
+  return await serieRepository.findSerieByCategoryId(cate);
+};
 
 exports.searchSerieName = async (filter) => {
   return await serieRepository.searchSerie(filter);

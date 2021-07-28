@@ -2,6 +2,7 @@ const Serie = require("../models/Serie");
 const Episode = require("../models/Episode");
 const SportsPlayer = require("../models/SportsPlayer");
 const { Sequelize } = require("sequelize");
+const dbConnection = require("../config/db");
 
 // FIND
 exports.findAllSeries = async () => {
@@ -13,6 +14,21 @@ exports.findAllSeries = async () => {
       },
       { model: SportsPlayer, attributes: ["name", "photo"] },
     ],
+  });
+};
+
+// FIND LAST UPDATE --> QUERY
+exports.findAllSeriesLastUpdate = async () => {
+  return await Serie.findAll({
+    include: [
+      {
+        model: Episode,
+        attributes: ["id", "number", "title", "duration", "photo"],
+      },
+      { model: SportsPlayer, attributes: ["name", "photo"] },
+    ],
+    limit: [6],
+    order: [["createdAt", "DESC"]],
   });
 };
 

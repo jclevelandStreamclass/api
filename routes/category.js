@@ -12,14 +12,23 @@ router.get("/all", async (req, res, next) => {
   }
 });
 
-router.get("/search:name?", async (req, res, next)=> {
+router.get("/latest/Update", async (req, res, next) => {
+  try {
+    const categories = await categoryServices.getAllCategoriesLastUpdate();
+    res.status(200).json(categories);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
+router.get("/search:name?", async (req, res, next) => {
   try {
     const categories = await categoryServices.searchCategoryName(req.query);
-    res.status(200).json(categories)
+    res.status(200).json(categories);
   } catch (error) {
-    next(error)
+    next(error);
   }
-})
+});
 
 router.get("/:id", async (req, res, next) => {
   try {
@@ -31,10 +40,8 @@ router.get("/:id", async (req, res, next) => {
   }
 });
 
-
-
 router.post("/private/", roleValidation(), async (req, res, next) => {
-    try {
+  try {
     await categoryServices.createCategory(req.body);
     res.sendStatus(201);
   } catch (error) {
