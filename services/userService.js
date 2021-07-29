@@ -8,6 +8,7 @@ const {
 } = require("../validations/userValidation");
 const tokenRepository = require("../repositories/tokenOperationRepository");
 const mailService = require("../services/mailService");
+const ERRORS = require('../utils/constants')
 
 exports.getAllUsers = async () => {
   return userRepository.findAllUsers();
@@ -85,14 +86,21 @@ exports.login = async ({ email, password }) => {
 exports.editUser = async (id, userData) => {
   const user = await userRepository.findUserById(id);
   if (!user) throw new Error("User not found");
-
+  if (userData.email) {
+    const userWithEmail = await userRepository.findUserByEmail(userData.email)
+    if (userWithEmail) {
+      throw new HttpError(418, ERRORS.INVALID_EMAIL)
+    }
+  }
   const validateUser = await updateUserSchema.validateAsync(userData);
 
   if (validateUser.password) {
     validateUser.password = await encryptPassword(validateUser.password);
   }
 
-  const updateUser = await userRepository.updateUser(id, validateUser);
+    const updateUser = await userRepository.updateUser(id, validateUser);
+
+  
 
   if (userData.role) {
     const foundUser = await userRepository.findUserById(id);

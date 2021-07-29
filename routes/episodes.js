@@ -25,7 +25,7 @@ router.get("/search:title?", async (req, res, next) => {
 router.get("/private/:id", roleValidation("premium"), async (req, res, next) => {
   try {
     const { id } = req.params;
-    const episode = await episodeService.getEpisodeById(id);
+    const episode = await episodeService.getEpisodeById(id, req.user);
     res.status(200).json(episode);
   } catch (error) {
     next(error);
@@ -44,7 +44,6 @@ router.get("/totaltime/:seriesId", async (req, res, next) => {
   }
 });
 
-//solo admin puede crear, editar y eliminar
 router.post("/private/", roleValidation(), async (req, res, next) => {
   try {
     const episode = await episodeService.createEpisode(req.body);

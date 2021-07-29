@@ -30,3 +30,4 @@ exports.INVALID_EPISODE = "Episode does not exist";
 exports.INVALID_PASSWORD = "Invalid password";
 exports.INVALID_ID = "Invalid ID";
 exports.INVALID_AUTHORIZATION = "You're not authorized";
+exports.INVALID_EMAIL = "This email is already being used";

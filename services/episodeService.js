@@ -2,7 +2,8 @@ const episodeRepository = require("../repositories/episodeRepository");
 const HttpError = require('../utils/httpError');
 const ERRORS = require('../utils/constants');
 const { insertEpisodeSchema, updateEpisodeSchema } = require('../validations/episodeValidations');
-const serieRespository = require('../repositories/serieRepository')
+const serieRespository = require('../repositories/serieRepository');
+const userRepository = require('../repositories/userRepository')
 
 exports.createEpisode = async (episode) => {
 
@@ -23,7 +24,13 @@ exports.getAllEpisodes = async () => {
   return episodes = await episodeRepository.findAllEpisodes();
 };
 
-exports.getEpisodeById = async (id) => {
+exports.getEpisodeById = async (id, user) => {
+  const foundUser = await userRepository.findUserById(user.id)
+  console.log(foundUser.role)
+  console.log(user.role)
+  if (foundUser?.role !== 'premium') {
+    throw new HttpError(401, ERRORS.INVALID_AUTHORIZATION);
+  }
   const foundEpisode = await episodeRepository.findEpisodeById(id);
   if (!foundEpisode) throw new HttpError(404, ERRORS.INVALID_ID)
   return foundEpisode;
