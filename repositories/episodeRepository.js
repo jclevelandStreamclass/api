@@ -17,7 +17,11 @@ exports.findEpisodeById = async(id) => {
 }
 
 exports.findSumDurationEpisodes = async (searchSerieId) => {
-    return await Episode.findAll({ attributes: [[Sequelize.fn('sec_to_time', Sequelize.fn('sum', Sequelize.fn('time_to_sec', Sequelize.col('duration')))), 'total_time']], where: { serieId: searchSerieId }, });
+    return await Episode.findAll({
+        attributes: [[Sequelize.fn('sec_to_time',
+            Sequelize.fn('sum', Sequelize.fn('time_to_sec', Sequelize.col('duration')))),
+            'total_time']], where: { serieId: searchSerieId },
+    });
 };
 
 exports.searchEpisode = async (filter) => {

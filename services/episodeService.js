@@ -28,7 +28,7 @@ exports.getEpisodeById = async (id, user) => {
   const foundUser = await userRepository.findUserById(user.id)
   console.log(foundUser.role)
   console.log(user.role)
-  if (foundUser?.role !== 'premium') {
+  if (foundUser?.role !== 'premium' || foundUser?.role !== 'admin') {
     throw new HttpError(401, ERRORS.INVALID_AUTHORIZATION);
   }
   const foundEpisode = await episodeRepository.findEpisodeById(id);
