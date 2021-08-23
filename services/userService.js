@@ -2,13 +2,10 @@ const userRepository = require("../repositories/userRepository");
 const encryptPassword = require("../utils/encryptPassword");
 const HttpError = require("../utils/httpError");
 const { generateToken } = require("./jwtServices");
-const {
-  insertUserSchema,
-  updateUserSchema,
-} = require("../validations/userValidation");
+const { insertUserSchema, updateUserSchema } = require("../validations/userValidation");
 const tokenRepository = require("../repositories/tokenOperationRepository");
 const mailService = require("../services/mailService");
-const ERRORS = require('../utils/constants')
+const ERRORS = require('../utils/constants');
 
 exports.getAllUsers = async () => {
   return userRepository.findAllUsers();
@@ -24,13 +21,13 @@ exports.getUserByEmail = async (email) => {
 };
 
 exports.signUp = async (userData) => {
-  const validateUser = await insertUserSchema.validateAsync(userData);
 
+  const validateUser = await insertUserSchema.validateAsync(userData);
   const encryptedPassword = await encryptPassword(validateUser.password);
 
   const user = await userRepository.insertUser({
     ...validateUser,
-    password: encryptedPassword,
+    password: encryptedPassword
   });
 
   const tokenOperation = await tokenRepository.createTokenOperation({
@@ -55,7 +52,7 @@ exports.activateUser = async (id) => {
 
 exports.login = async ({ email, password }) => {
   if (!email || !password) throw new Error("Invalid data provided");
-
+  
   const user = await userRepository.findUserWithPasswordByEmail(email);
   if (!user) throw new Error("Not found user");
 
@@ -85,22 +82,23 @@ exports.login = async ({ email, password }) => {
 
 exports.editUser = async (id, userData) => {
   const user = await userRepository.findUserById(id);
+
   if (!user) throw new Error("User not found");
+
   if (userData.email) {
     const userWithEmail = await userRepository.findUserByEmail(userData.email)
     if (userWithEmail) {
       throw new HttpError(418, ERRORS.INVALID_EMAIL)
     }
   }
+
   const validateUser = await updateUserSchema.validateAsync(userData);
 
   if (validateUser.password) {
     validateUser.password = await encryptPassword(validateUser.password);
   }
 
-    const updateUser = await userRepository.updateUser(id, validateUser);
-
-  
+  const updateUser = await userRepository.updateUser(id, validateUser);
 
   if (userData.role) {
     const foundUser = await userRepository.findUserById(id);
@@ -132,6 +130,5 @@ exports.editUser = async (id, userData) => {
 
 exports.removeUser = async (id) => {
   if (!id) throw new Error();
-
   await userRepository.deleteUser;
 };

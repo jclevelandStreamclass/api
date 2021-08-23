@@ -19,8 +19,7 @@ exports.ACTIVITY = Object.freeze({
 })
 
 exports.INVALID_ACCOUNT = "You must activate your account";
-exports.NO_USER_DATA_PROVIDED =
-  "You must provide a valid email address and a password";
+exports.NO_USER_DATA_PROVIDED = "You must provide a valid email address and a password";
 exports.INVALID_DATA = "Data provided is invalid";
 exports.INVALID_USER = "User does not exist";
 exports.INVALID_SERIE = "Series does not exist";

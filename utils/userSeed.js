@@ -11,10 +11,8 @@ const users = [
         avatar: "url ",
         role: ROLE.ADMIN,
         active: true,
-    },
+    }
 ]
-
-
 
 User.bulkCreate(users).then(() =>
   console.log("Users loaded")

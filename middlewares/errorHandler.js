@@ -1,5 +1,5 @@
 const errorHandler = (error, req, res, next) => {
-  const status = error.statusCode ?? 500;
+  const status = error.statusCode || 500;
 
   if (
     error.name === "JsonWebTokenError" ||
