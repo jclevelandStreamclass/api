@@ -26,8 +26,9 @@ router.get("/private/:id", roleValidation("premium"), async (req, res, next) => 
   try {
     const { id } = req.params;
     const episode = await episodeService.getEpisodeById(id, req.user);
+
     res.status(200).json(episode);
-  } catch (error) {
+  } catch (error) {    
     next(error);
   }
 });

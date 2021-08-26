@@ -60,8 +60,6 @@ const sportsPLayers = [
       "http://tennisnow.com/images/2021/June/Lopez-mallorca-06222021.aspx",
   },
 
-  
-  
 ];
 
 SportPlayer.bulkCreate(sportsPLayers).then(() =>

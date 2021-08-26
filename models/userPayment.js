@@ -1,19 +1,23 @@
-const {DataTypes} = require("sequelize");
+const { DataTypes } = require("sequelize");
 const dbConnection = require('../config/db');
-const {ACTIVITY} = require('../utils/constants');
+const { ACTIVITY } = require('../utils/constants');
 
 
-const userPayment = dbConnection.define("UserPayment",{
-    id: {
-        primaryKey: true,
-        allowNull: true,
-        type: DataTypes.UUID,
-        defaultValue: DataTypes.UUIDV4
-      },
-      status : {
-        type:DataTypes.ENUM(Object.values(ACTIVITY)),
-        defaultValue: ACTIVITY.INACTIVE
-      }
+const userPayment = dbConnection.define("UserPayment", {
+  id: {
+    primaryKey: true,
+    allowNull: true,
+    type: DataTypes.UUID,
+    defaultValue: DataTypes.UUIDV4
+  },
+  status: {
+    type: DataTypes.ENUM(Object.values(ACTIVITY)),
+    defaultValue: ACTIVITY.INACTIVE
+  },
+  paymentData : {
+    type: DataTypes.TEXT,
+    allowNull: false
+  }
 })
 
 

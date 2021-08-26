@@ -21,6 +21,7 @@ exports.createSportsPlayer = async (sportsPlayer) => {
   return await SportsPlayerRepository.insertSportsPlayer(sportsPlayer);
 };
 
+
 exports.editSportsPlayer = async (sportsPlayerData, id) => {
   const sportsPlayer = await SportsPlayerRepository.updateSportsPlayer(
     sportsPlayerData,

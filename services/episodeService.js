@@ -6,7 +6,6 @@ const serieRespository = require('../repositories/serieRepository');
 const userRepository = require('../repositories/userRepository')
 
 exports.createEpisode = async (episode) => {
-
   const { title, duration, description, photo, video } = episode;
   if (!title || !duration || !description || !photo || !video) {
     throw new HttpError(400, ERRORS.INVALID_DATA)
@@ -25,8 +24,8 @@ exports.getAllEpisodes = async () => {
 };
 
 exports.getEpisodeById = async (id, user) => {
-  const foundUser = await userRepository.findUserById(user.id)
-  if (foundUser.role !== 'premium' || foundUser.role !== 'admin') {
+  const foundUser = await userRepository.findUserById(user.id);
+  if (foundUser.role !== 'premium' && foundUser.role !== 'admin') {
     throw new HttpError(401, ERRORS.INVALID_AUTHORIZATION);
   }
   const foundEpisode = await episodeRepository.findEpisodeById(id);

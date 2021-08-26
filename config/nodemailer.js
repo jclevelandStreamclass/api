@@ -22,6 +22,7 @@ const loadProdConfig = () => {
 
 const loadTestConfig = async () => {
   const account = await createTestAccount();
+  
   return {
     host: "smtp.sendgrid.net",
     port: 587,

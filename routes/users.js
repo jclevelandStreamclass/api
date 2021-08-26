@@ -1,6 +1,7 @@
 var express = require("express");
 var router = express.Router();
 const userService = require("../services/userService");
+const userPeymentService = require("../services/userPaymentService");
 const roleValidation = require("../middlewares/roleValidation");
 const multer = require("../middlewares/multer");
 
@@ -70,10 +71,28 @@ router.put("/plan/:id", async (req, res) => {
     if (req.file) {
       req.body.avatar = req.file.path;
     }
+    let dataRs="";
+    if(!req.body.result){
+      res.status(400).json({ message: 'no_payment_data' });
+    }else{
+      dataRs = req.body.result;
+      delete req.body.result;
+    }
+
     const { id } = req.params;
+    await userService.editUser(id, req.body);
     const user = await userService.editUser(id, req.body);
+    const payment = await userPeymentService.paymentData({
+      paymentData:dataRs,
+      userId:id,
+      serieId:null
+    })
+    console.log("🚀 ~ file: users.js ~ line 88 ~ router.put ~ payment", payment)
     res.status(200).json(user);
+
   } catch (err) {
+    console.log("🚀 ~ file: users.js ~ line 93 ~ router.put ~ err", err)
+    
     res.status(400).json({ message: err.message });
   }
 });
