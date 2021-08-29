@@ -1,11 +1,12 @@
 var express = require("express");
 const roleValidationAdmin = require("../middlewares/roleValidationAdmin");
+const roleValidation = require("../middlewares/roleValidation");
 var router = express.Router();
 const episodeService = require("../services/episodeService");
 const categoryServices = require("../services/categoryService");
 const sportsPlayerService = require("../services/sportsplayerService");
 
-router.get("/categories/", roleValidationAdmin(), async (req, res, next) => {
+router.get("/categories/", roleValidation(), async (req, res, next) => {
   try {
     const categories = await categoryServices.getAllCategories();
     res.status(200).json(categories);
@@ -24,7 +25,7 @@ router.post("/categories/", roleValidationAdmin(), async (req, res, next) => {
   }
 });
 
-router.put("/categories/:id", roleValidation(), async (req, res, next) => {
+router.put("/categories/:id", roleValidationAdmin(), async (req, res, next) => {
   try {
     const { id } = req.params;
     await categoryServices.editCategory(req.body, id);
@@ -34,7 +35,7 @@ router.put("/categories/:id", roleValidation(), async (req, res, next) => {
   }
 });
 
-router.delete("/categories/:id", roleValidation(), async (req, res, next) => {
+router.delete("/categories/:id", roleValidationAdmin(), async (req, res, next) => {
   try {
     const { id } = req.params;
     await categoryServices.removeCategory(id);

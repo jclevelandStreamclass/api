@@ -87,12 +87,9 @@ router.put("/plan/:id", async (req, res) => {
       userId:id,
       serieId:null
     })
-    console.log("🚀 ~ file: users.js ~ line 88 ~ router.put ~ payment", payment)
     res.status(200).json(user);
 
-  } catch (err) {
-    console.log("🚀 ~ file: users.js ~ line 93 ~ router.put ~ err", err)
-    
+  } catch (err) {    
     res.status(400).json({ message: err.message });
   }
 });

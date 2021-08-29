@@ -3,6 +3,9 @@ const ERRORS = require("../utils/constants");
 
 const roleValidationAdmin = () => {
   return (req, res, next) => {
+
+    console.log("🚀 ~ file: roleValidationAdmin.js ~ line 9 ~ return ~ req.user", req.user)
+
     if (!req.user.role) {
       throw new HttpError(402, ERRORS.INVALID_AUTHORIZATION);
     }

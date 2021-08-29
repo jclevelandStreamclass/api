@@ -6,6 +6,7 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 
 const indexRouter = require("./routes/index");
+const adminRouter = require("./routes/admin");
 const usersRouter = require("./routes/users");
 const seriesRouter = require("./routes/series");
 const episodesRouter = require("./routes/episodes");
@@ -13,7 +14,6 @@ const categoryRouter = require("./routes/category");
 const sportsPlayerRouter = require("./routes/sportsPlayer");
 const tokenValidation = require("./middlewares/tokenValidation");
 const errorHandler = require("./middlewares/errorHandler");
-
 const loadModels = require("./models/relationship");
 
 var app = express();
@@ -31,6 +31,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
+app.use("/admin", adminRouter);
 app.use("/series", seriesRouter);
 app.use("/episodes", episodesRouter);
 app.use("/sportsPlayer", sportsPlayerRouter);

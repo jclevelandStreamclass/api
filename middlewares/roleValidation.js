@@ -5,7 +5,6 @@ const roleValidation = (role) => {
   
   const roles = Array.isArray(role) ? role : [role];
   return (req, res, next) => {
-
     if (!req.user.role) {
       throw new HttpError(402, ERRORS.INVALID_AUTHORIZATION);
     }
