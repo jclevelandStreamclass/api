@@ -57,7 +57,6 @@ exports.editEpisode = async (id, episodeDetails) => {
   };
   try {
     await updateEpisodeSchema.validateAsync(episodeDetails);
-
   } catch (error) {
     throw new HttpError(400, ERRORS.INVALID_DATA)
   };

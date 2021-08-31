@@ -7,7 +7,7 @@ const insertCategorySchema = Joi.object({
 
 const updateCategorySchema = Joi.object({
   name: Joi.string().max(50),
-  photo: Joi.string().min(1),
+  photo: Joi.string(),
 });
 
 module.exports = { updateCategorySchema, insertCategorySchema };

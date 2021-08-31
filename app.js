@@ -15,13 +15,14 @@ const sportsPlayerRouter = require("./routes/sportsPlayer");
 const tokenValidation = require("./middlewares/tokenValidation");
 const errorHandler = require("./middlewares/errorHandler");
 const loadModels = require("./models/relationship");
+const bodyParser = require('body-parser');
 
 var app = express();
 loadModels();
 
 const cors = require("cors");
 app.use(cors());
-
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(tokenValidation);
 app.use(logger("dev"));
 app.use(express.json());

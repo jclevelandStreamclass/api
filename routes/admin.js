@@ -5,6 +5,7 @@ var router = express.Router();
 const episodeService = require("../services/episodeService");
 const categoryServices = require("../services/categoryService");
 const sportsPlayerService = require("../services/sportsplayerService");
+const multer = require("../middlewares/multer");
 
 router.get("/categories/", roleValidation(), async (req, res, next) => {
   try {
@@ -15,9 +16,11 @@ router.get("/categories/", roleValidation(), async (req, res, next) => {
   }
 });
 
-
-router.post("/categories/", roleValidationAdmin(), async (req, res, next) => {
+router.post("/categories/", roleValidationAdmin(), multer.single("photo"), async (req, res, next) => {
   try {
+    if (req.file) {
+      req.body.photo = req.file.path;
+    }
     await categoryServices.createCategory(req.body);
     res.sendStatus(201);
   } catch (error) {
@@ -25,12 +28,18 @@ router.post("/categories/", roleValidationAdmin(), async (req, res, next) => {
   }
 });
 
-router.put("/categories/:id", roleValidationAdmin(), async (req, res, next) => {
+router.put("/categories/:id",  roleValidationAdmin(), multer.single("photo"), async (req, res, next) => {
   try {
     const { id } = req.params;
+
+    if (req.file) {
+      req.body.photo = req.file.path;
+    }
     await categoryServices.editCategory(req.body, id);
     res.sendStatus(204);
   } catch (error) {
+    console.log("🚀 ~ file: admin.js ~ line 37 ~ router.put ~ error", error)
+    
     next(error);
   }
 });
@@ -54,7 +63,6 @@ router.get("/players", async (req, res) => {
     res.status(400).json({ message: error.message });
   }
 });
-
 
 router.post("/players", async (req, res) => {
   try {

@@ -27,6 +27,8 @@ exports.searchCategoryName = async (filter) => {
 
 exports.createCategory = async (category) => {
   const { name, photo } = category;
+  console.log("🚀 ~ file: categoryService.js ~ line 30 ~ exports.createCategory= ~  name, photo",  name, photo)
+  
   if (!name || !photo) {
     throw new HttpError(400, ERRORS.INVALID_DATA);
   }
@@ -41,11 +43,11 @@ exports.createCategory = async (category) => {
 exports.editCategory = async (categoryDetails, categoryId) => {
   const category = await categoryRepository.findCategoryById(categoryId);
   if (!category) throw new HttpError(404, ERRORS.INVALID_CATEGORY);
-  try {
+  /*try {
     await updateCategorySchema.validateAsync(categoryDetails);
   } catch (error) {
     throw new HttpError(400, ERRORS.INVALID_DATA);
-  }
+  }*/
   return await categoryRepository.updateCategory(categoryId, categoryDetails);
 };
 
