@@ -26,9 +26,7 @@ exports.searchCategoryName = async (filter) => {
 };
 
 exports.createCategory = async (category) => {
-  const { name, photo } = category;
-  console.log("🚀 ~ file: categoryService.js ~ line 30 ~ exports.createCategory= ~  name, photo",  name, photo)
-  
+  const { name, photo } = category;  
   if (!name || !photo) {
     throw new HttpError(400, ERRORS.INVALID_DATA);
   }

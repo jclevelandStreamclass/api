@@ -31,15 +31,12 @@ router.post("/categories/", roleValidationAdmin(), multer.single("photo"), async
 router.put("/categories/:id",  roleValidationAdmin(), multer.single("photo"), async (req, res, next) => {
   try {
     const { id } = req.params;
-
     if (req.file) {
       req.body.photo = req.file.path;
     }
     await categoryServices.editCategory(req.body, id);
     res.sendStatus(204);
-  } catch (error) {
-    console.log("🚀 ~ file: admin.js ~ line 37 ~ router.put ~ error", error)
-    
+  } catch (error) {   
     next(error);
   }
 });
@@ -54,8 +51,7 @@ router.delete("/categories/:id", roleValidationAdmin(), async (req, res, next) =
   }
 });
 
-//player
-router.get("/players", async (req, res) => {
+router.get("/players",roleValidationAdmin(), async (req, res) => {
   try {
     const sportsPlayers = await sportsPlayerService.getAllSportsPlayers();
     res.status(200).json(sportsPlayers);
@@ -64,8 +60,12 @@ router.get("/players", async (req, res) => {
   }
 });
 
-router.post("/players", async (req, res) => {
+router.post("/players",roleValidationAdmin(), async (req, res) => {
   try {
+    if (req.file) {
+      req.body.photo = req.file.path;
+    }
+    
     const sportsPlayer = await sportsPlayerService.createSportsPlayer(req.body);
     res.status(201).json(sportsPlayer);
   } catch (error) {
@@ -73,14 +73,15 @@ router.post("/players", async (req, res) => {
   }
 });
 
-
-router.put("/players/:id", async (req, res) => {
+router.put("/players/:id",roleValidationAdmin(),multer.single("photo"), async (req, res) => {
   try {
     const { id } = req.params;
-    const sportsPlayer = await sportsPlayerService.editSportsPlayer(
-      req.body,
-      id
-    );
+    console.log("🚀 ~ file: admin.js ~ line 80 ~ router.put ~ req.file", req.file)
+
+    if (req.file) {
+      req.body.photo = req.file.path;
+    }
+    const sportsPlayer = await sportsPlayerService.editSportsPlayer(req.body, id);
     res.status(200).json(sportsPlayer);
   } catch (error) {
     res.status(400).json({ message: error.message });
